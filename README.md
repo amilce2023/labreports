@@ -1,11 +1,12 @@
 # labreports
 Reports for Fractal Geometry
 
-Web Page: https://amilce2023.github.io/labreports/
+Web Page: https://amilce2023.github.io/labreports/main/images/juliasetfractal.jpg
+
 
 Lab 1: https://amilce2023.github.io/labreports/Lab1.html
 
-Fractal Image: https://github.com/amilce2023/labreports/main/images/juliasetfractal.jpg
+Fractal Image: https://github.io/amilce2023/labreports/main/images/juliasetfractal.jpg
 
 # Notes
 
