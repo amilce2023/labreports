@@ -1,0 +1,166 @@
+
+<!-- INTRODUCTION SECTION -->
+<!-- -------------------------------------------------------------------------------------------- -->
+<!-- -------------------------------------------------------------------------------------------- -->
+<!-- -------------------------------------------------------------------------------------------- -->
+<!-- -------------------------------------------------------------------------------------------- -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Template for Fractal Geometry Computational Lab Reports" />
+  <link rel="stylesheet" href="https://latex.vercel.app/style.css" />
+  <link 
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism.min.css"
+  />
+  <script defer id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$','$$'], ['\\[','\\]']],
+      }
+    }
+  </script>
+  <title>Fractal Geometry Lab Report</title> 
+</head>
+<body id="top">
+
+
+
+
+  <header>
+    <h1>Fractal Geometry Lab Report</h1>
+    <p class="author">
+      [Annkid Joseph Milce] <br />
+      [02/07/2025]
+    </p>
+  </header>
+  
+
+
+  <main>
+    <article class="indent-pars">
+      
+      <!-- INTRODUCTION SECTION -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <section id="introduction">
+        <h2>Introduction</h2>
+        <p>
+            This is a report for module 1 one of the course Fractal Geometry. 
+          In this module we experiment with a Colab code that introduce us to Turtle graphics.
+          The first part of the experiment consisted in generating codes that display a turtle moving 
+          on a canvas. We started by importing the turtle library then we initialize the turtle by 
+          setting the baground in which the turle is shown moving in a forward direction.We then 
+          extend the code to show that the turtle moves to the right. We keep making changes until
+          we show the turtle moves in different directions by implementing some angles of rotations 
+          that allow the turtle to construct a square after returning to its initial position. In 
+          addition, we modify the code, such that the turtle creates a bigger square in a different
+          baground. By changing the jump from its initial position (200, 200), to an a position of 
+          (500, 500), we obtained a larger square which we colored in white in a sky blue baground.
+          
+        </p>
+      </section>
+
+
+     
+	<!-- -------------------------------------------------------------------------------------------- -->
+	<!-- -------------------------------------------------------------------------------------------- -->
+	<!-- -------------------------------------------------------------------------------------------- -->
+	<!-- -------------------------------------------------------------------------------------------- -->
+	<pre><code class="language-python">
+	Below is a sample of the codes given by the instructor that were used to do the experiment.
+
+initializeTurtle()
+showturtle()
+color('blue')
+bgcolor('white')
+
+jump(200, 200)
+face(0)
+
+for _ in range(4):
+  forward(100)
+  right(90)
+
+  show()
+	</code></pre>
+
+
+
+
+
+
+      </section>
+
+      <!-- RESULTS & ANALYSIS SECTION -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <section id="results">
+      
+      
+        <h2>Results &amp; Analysis</h2>
+        <p>
+          In this placeholder section, you might describe observations,
+          results, or insights gained from any analysis. You can incorporate 
+          references to equations (e.g., $y = mx + b$) or embed images and 
+          other visual aids to illustrate your points.
+        </p>
+
+
+
+
+        <figure>
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Mandel_zoom_00_mandelbrot_set.jpg/800px-Mandel_zoom_00_mandelbrot_set.jpg"
+            alt="Mandelbrot Broad View"
+            width="600"
+            height="400"
+            loading="lazy"
+          />
+          <figcaption>
+            <strong>Figure 1:</strong> A broad view of the Mandelbrot set 
+            (max_iter = 100). Colors represent how many iterations were 
+            needed to exceed |z|=2.
+          </figcaption>
+        </figure>
+
+
+
+
+      </section>
+
+
+
+      <!-- CONCLUSION SECTION -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <section id="conclusion">
+        <h2>Conclusion</h2>
+        <p>
+          In this sample conclusion, we highlight how the iterative approach to generating fractals reveals the vast complexity inherent in seemingly simple equations. Through our Python implementation, we observed that small parameter changes can produce markedly different fractal patterns, underscoring the Mandelbrot set's boundless intricacy. Our visualizations not only confirm the self-similarity and infinite resolution of the set, but also underscore the crucial role of computational optimizations in making high-resolution explorations feasible. Ultimately, this lab demonstrates that fractal geometry, far from being mere mathematical curiosities, provides deep insights into pattern formation and complexity in both pure mathematics and broader scientific contexts. 
+        </p>
+      </section>
+
+     
+     
+     
+   
+     
+     
+     
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-python.min.js"></script>
+</body>
+</html>
