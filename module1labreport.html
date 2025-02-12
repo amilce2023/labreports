@@ -32,9 +32,9 @@
 
 
   <header>
-    <h1>Fractal Geometry Lab Report</h1>
+    <h1>Fractal Geometry Module 1 Lab Report</h1>
     <p class="author">
-      [Annkid Joseph Milce] <br />
+      [Annkid Joseph Milcé] <br />
       [02/07/2025]
     </p>
   </header>
@@ -52,30 +52,34 @@
       <section id="introduction">
         <h2>Introduction</h2>
         <p>
-            This is a report for module 1 one of the course Fractal Geometry. 
+        	This is a report for module 1 one of the course Fractal Geometry. 
           In this module we experiment with a Colab code that introduce us to Turtle graphics.
-          The first part of the experiment consisted in generating codes that display a turtle moving 
-          on a canvas. We started by importing the turtle library then we initialize the turtle by 
-          setting the baground in which the turle is shown moving in a forward direction.We then 
-          extend the code to show that the turtle moves to the right. We keep making changes until
-          we show the turtle moves in different directions by implementing some angles of rotations 
-          that allow the turtle to construct a square after returning to its initial position. In 
-          addition, we modify the code, such that the turtle creates a bigger square in a different
-          baground. By changing the jump from its initial position (200, 200), to an a position of 
-          (500, 500), we obtained a larger square which we colored in white in a sky blue baground.
+          The experiment consisted of two parts. The first part of the experiment consisted in 
+	  generating codes that display a turtle moving on a canvas while the second part consisted 
+	  in creating moving polygons with different sizes and colors in the turtle canvas.
           
         </p>
       </section>
-		Below is a sample of the codes given by the instructor that were 
-	    used to do the experiment.
+	  	To draw the moving turtle, We started by importing the turtle library 
+	  then we initialize the turtle by setting the baground in which the turle is shown 
+	  moving in a forward direction.We then extend the code to show that the turtle moves 
+	  to the right. We keep making changes until we show the turtle moves in different 
+	  directions by implementing some angles of rotations that allow the turtle to construct 
+	  a square after returning to its initial position. In addition, we modify the code, 
+	  such that the turtle creates a bigger square in a different baground. By changing 
+	  the jump from its initial position (200, 200), to an a position of (500, 500), we 
+	  obtained a larger square which we colored in white in a sky blue baground.
+
+	    Below is a sample of the codes given by the instructor that were used to do 
+	  the experiment followed by the modified code in which we changed the backgroung color
+	  and the position of the turtle. 
      
 	<!-- -------------------------------------------------------------------------------------------- -->
 	<!-- -------------------------------------------------------------------------------------------- -->
 	<!-- -------------------------------------------------------------------------------------------- -->
 	<!-- -------------------------------------------------------------------------------------------- -->
 	<pre><code class="language-python">
-	Below is a sample of the codes given by the instructor that were used to do the experiment.
-
+#Code 1
 initializeTurtle()
 showturtle()
 color('blue')
@@ -91,11 +95,27 @@ for _ in range(4):
   show()
 	</code></pre>
 
+	    <pre><code class="language-python">
+#Initialize the Turtle
+initializeTurtle()
+showturtle()
+color('white')
+bgcolor('skyblue')
 
+#Move to a suitable starting position
+jump(500, 500)
+face(0)
 
+#Draw a simple square
+for _ in range(4):
+  forward(300)
+  right(270)
 
+  #Display the drawing
+  show()    
+	</code></pre>
 
-
+	    
       </section>
 
       <!-- RESULTS & ANALYSIS SECTION -->
