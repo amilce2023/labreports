@@ -54,34 +54,18 @@
         <h2>Introduction</h2>
         <p>
           This is a report for module 1 one of the course Fractal Geometry. 
-          In this module we experiment with a Colab code that introduce us to Turtle graphics.
+          In this module we experiment with a Colab code that introduce us to the Logo programming
+	  language. Developed in 1967 by Wally Feurzeig, Seymour Papert, and Cynthia Solomon, Logo 
+	  is an educational language that uses turtle graphics to allow users to command movements 
+	  and drawings with a turtle. According to Papert, Logo is a tool that could be used to make
+	  great work, mediocre work, or nothing at all. As such, a Logo learning environment can,
+	  for instance, allow students to learn about angles by exploring instead of being told the
+	  mathematical facts. The students has the opportunity to discover the facts about angles.
           The experiment consisted of two parts. The first part of the experiment consisted in 
 	  generating codes that display a turtle moving on a canvas while the second part consisted 
 	  in creating moving polygons with different sizes and colors in the turtle canvas.
         </p>
       </section>
-
-
-
-      <!-- DEVELOPMENT SECTION -->
-      <!-- -------------------------------------------------------------------------------------------- -->
-      <!-- -------------------------------------------------------------------------------------------- -->
-      <!-- -------------------------------------------------------------------------------------------- -->
-      <!-- -------------------------------------------------------------------------------------------- -->
-      <section id="development">      
-     	<h2>Development</h2>
-	</p>
-	  For the first part, to draw the moving turtle, we started by importing the turtle 
-          library then we initialize the turtle by setting the baground in which the turle is     
-	  shown moving in a forward direction.We then extend the code to show that the turtle 
-	  moves to the right. We keep making changes until we show the turtle moves in different 
-	  directions by implementing some angles of rotations that allow the turtle to construct 
-	  a square after returning to its initial position. In addition, we modify the code, 
-	  such that the turtle creates a bigger square in a different baground. Changing 
-	  the jump from its initial position (200, 200) to an a position of (500, 500)
-	  resulted in larger square which we colored in white in a sky blue baground.
-	 </p>
-       </section>
 
 
 	    
@@ -100,7 +84,7 @@
 	<!-- -------------------------------------------------------------------------------------------- -->
 	<section id="code">
 	<pre><code class="language-python">
-	#Given Code
+	#Given Code                    
 
 	initializeTurtle()
 	showturtle()
@@ -150,12 +134,32 @@
       
         <h2>Results &amp; Analysis</h2>
         <p>
-          In this placeholder section, you might describe observations,
-          results, or insights gained from any analysis. You can incorporate 
-          references to equations (e.g., $y = mx + b$) or embed images and 
-          other visual aids to illustrate your points.
-        </p>
+          This experiment is conducted by generating a Google Colab code that creates a square by
+	  moving a turtle on a canvas. The first part of the code consisted in importing the Turtle
+	  Library. This library allows the creation of the square by moving the turtle to create lines.
+	  The function initializeTurtle() sets up the turtle environment while the showturtle() makes 
+	  the turtle visible to the user. The functions color() and bgcolor() were used to change the 
+	  pen color and set the background color, respectively. Having initializing the turtle, the
+	  functions jump() and face() were used to move the turtle to a suitable position as desired.
+	  It is important to note that since we want to create a square, a "for" loop was used to 
+	  to create the sides of the square. In this loop, the for_in range(4) allows to draw the 4 
+          the four sides of the square. In this experiment each side was set to be 100 units long 
+	  using the forward() function followed by the right() fucntion to turn the turtle a certain 
+          degrees to the right, and thus forming the corners of the square. Finally, the show()
+	  function displays the final drawing after the square was dawned. 
 
+
+
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+      <!-- -------------------------------------------------------------------------------------------- -->
+        </p>
+        In the modified portion of the code, the same functions and commands were used. However, the
+        turtle starting position was set at the coordinates (500, 500) using the the command jump 
+	(500, 500). We also increased the sides length of the square by 200 units more and turned the
+	turtle 270 degrees to the right. We also changed the background color from white to sky blue,
+	and make the pen clor white. The results from both codes can be seen in the diagrams below.
 
 
 
