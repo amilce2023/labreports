@@ -87,15 +87,7 @@
          canvas_height = 800
          initializeTurtle(initial_window_size=(canvas_width, canvas_height), mode='auto')
          </code></pre
-
-
-
-	
-	</section>
-      <!-- --------------------------------------------------------------------------------------------------- -->
-      <!-- --------------------------------------------------------------------------------------------------- -->
-      <!-- --------------------------------------------------------------------------------------------------- -->
-      <!-- --------------------------------------------------------------------------------------------------- -->
+	 </p>
 	This portion of the code setup the canvas; the place that holds all the drawing elements of 
 	 the experiment.  The width and height are used to define the dimensions of the dimensions 
 	 of the canvas as an 800 X 1000 rectangle while the last part of this code begins the turtle 
@@ -131,19 +123,17 @@
 	displaying it on the canvas. 
 	</p>
 
-	def random_walk(steps, step_length):
-        speed(0)              
-        penup()
-        jump(450, 450)       
-        pendown()
-
-         for _ in range(steps):
-        forward(step_length)               
-        right(random.uniform(-180, 180))
-        steps = 1000
-        step_length = 10
-        show()
+	<section id="code">
+	<pre><code class="language-python">
+	 initializeTurtle()
+showturtle()
+jump(50, 400)
+face(90)
      </code></pre
+     </p>
+     This code fragment reinitializes the turtle in the positions it at the coordinate (50, 400) 
+     and ensures its face is 90 degrees upward. 
+     </p>
 	
       </section>
       <!-- --------------------------------------------------------------------------------------------------- -->
