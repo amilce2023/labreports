@@ -34,10 +34,10 @@
 
   <header>
     <h1>Fractal Geometry 
-	    Module 1 Lab Report</h1>
+	    Module 2 Lab Report</h1>
     <p class="author">
       Annkid Joseph Milcé <br />
-      02/07/2025
+      02/21/2025
     </p>
   </header>
   
@@ -54,17 +54,14 @@
       <section id="introduction">
         <h2>Introduction</h2>
         <p>
-          This is a report for module 1 one of the course Fractal Geometry. 
-          In this module we experiment with a Colab code that introduce us to the Logo programming
-	  language. Developed in 1967 by Wally Feurzeig, Seymour Papert, and Cynthia Solomon, Logo 
-	  is an educational language that uses turtle graphics to allow users to command movements 
-	  and drawings with a turtle. According to Papert, Logo is a tool that could be used to make
-	  great work, mediocre work, or nothing at all. As such, a Logo learning environment can,
-	  for instance, allow students to learn about angles by exploring instead of being told the
-	  mathematical facts. The students has the opportunity to discover the facts about angles.
-          The experiment consisted of two parts. The first part of the experiment consisted in 
-	  generating codes that display a turtle moving on a canvas while the second part consisted 
-	  in creating moving polygons with different sizes and colors in the turtle canvas.
+          This is a report for module 2 one of the course Fractal Geometry. In this module we are 
+	  experimenting with a Colab code that allows us to draw fractal patterns from scratch using 
+	  Turtle Logo graphics. In the experiment, we started by drawing some random walk simulations 
+	  which we mprove by applying blip lines to recursively draw the fractal lines in increasing order.
+	  In the middle experiments, we tranform the random walks in Koch Snowflake fractal by using the blip
+	  line function. At the end of the experiment, the random walks were turned into a dragon curve
+	  fractal suing the dragon_curve function. Below, we provide the code segments with an explanation 
+          of the role played by what each code element.
         </p>
 
 
@@ -75,10 +72,24 @@
       <!-- --------------------------------------------------------------------------------------------------- -->
     </section>
        </p>
-	      
-	  Below is a sample of the codes given by the instructor that were used to do the
-	  experiment followed by the modified code in which we changed the backgroung color
-	  and the position of the turtle. 
+
+	    <!-- ------------------------------------------------------------------------------------------------- -->
+	<!-- ------------------------------------------------------------------------------------------------- -->
+	<!-- ------------------------------------------------------------------------------------------------- -->
+	<!-- ------------------------------------------------------------------------------------------------- -->
+	<section id="code">
+	<pre><code class="language-python">                
+
+	from turtle_setup import 
+        import random
+
+  	show()
+	</code></pre>
+	The first segment of the code ensures that we import the necessary library to perform the 
+	experiment. We imported the turtle_setup module which is a library that will provide the 
+	turtle’s initialization functions and graphic functionalities followed by the random module 
+	that will generate random angles for the random walk of the turtle. They allow the user to 
+	initialize and control the graphics environment.
         </p>
      
 	<!-- ------------------------------------------------------------------------------------------------- -->
