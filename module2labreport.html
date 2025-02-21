@@ -81,50 +81,45 @@
 	initialize and control the graphics environment.
         </p>
      
-	<!-- ------------------------------------------------------------------------------------------------- -->
-	<!-- ------------------------------------------------------------------------------------------------- -->
-	<!-- ------------------------------------------------------------------------------------------------- -->
-	<!-- ------------------------------------------------------------------------------------------------- -->
 	<section id="code">
 	<pre><code class="language-python">
-	#Given Code                    
+	 canvas_width = 1000
+         canvas_height = 800
+         initializeTurtle(initial_window_size=(canvas_width, canvas_height), mode='auto')
+         </code></pre
+         This portion of the code setup the canvas; the place that holds all the drawing elements of 
+	 the experiment.  The width and height are used to define the dimensions of the dimensions 
+	 of the canvas as an 800 X 1000 rectangle while the last part of this code begins the turtle 
+	 graphics with the specified window size. The mode = auto automatically sets the window 
+	 size of the turtle environment.
+	</p>
 
-	initializeTurtle()
-	showturtle()
-	color('blue')
-	bgcolor('white')
+	<section id="code">
+	<pre><code class="language-python">
+	 canvas_width = 1000
+         canvas_height = 800
+         initializeTurtle(initial_window_size=(canvas_width, canvas_height), mode='auto')
+         </code></pre
+         This portion of the code setup the canvas; the place that holds all the drawing elements of 
+	 the experiment.  The width and height are used to define the dimensions of the dimensions 
+	 of the canvas as an 800 X 1000 rectangle while the last part of this code begins the turtle 
+	 graphics with the specified window size. The mode = auto automatically sets the window 
+	 size of the turtle environment.
+	</p>
 
-	jump(200, 200)
-	face(0)
+	def random_walk(steps, step_length):
+    speed(0)              
+    penup()
+    jump(450, 450)       
+    pendown()
 
-	for _ in range(4):
-	  forward(100)
-  	right(90)
+for _ in range(steps):
+        forward(step_length)               
+        right(random.uniform(-180, 180))
+steps = 1000
+step_length = 10
+show()
 
-  	show()
-	</code></pre>
-
-	    <pre><code class="language-python">
-
-	#Modified Code
-		    
-	initializeTurtle()
-	showturtle()
-	color('white')
-	bgcolor('skyblue')
-
-	jump(500, 500)
-	face(0)
-		    
-	for _ in range(4):
-  	forward(300)
- 	 right(270)
-
- 	#Display the drawing
-  	show()    
-	</code></pre>
-
-	    
       </section>
 
       <!-- RESULTS & ANALYSIS SECTION -->
