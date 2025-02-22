@@ -226,16 +226,20 @@ show()
         blip_line(length / 3, order - 1)
         left(60)
         blip_line(length / 3, order - 1)
+	     
 def koch_snowflake(length, order):
     for _ in range(3):
         blip_line(length, order)
         right(120)
+	     
 jump(250, 500)
 face(0)
 color('blue')
 length = 400
 order = 3
+	     
 koch_snowflake(length, order)
+	     
 show()
      </code></p>
      </p>
