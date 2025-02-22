@@ -237,14 +237,12 @@ jump(250, 500)
 face(0)
 color('blue')
 length = 400
-order = 3
-	     
+order = 3	     
 koch_snowflake(length, order)
 	     
 show()
-     </code></p>
+     </code></pre>
      </p>
-
 	
  </section>
  <!-- --------------------------------------------------------------------------------------------------- -->
@@ -258,18 +256,63 @@ show()
     transforms the three previous blip lines into an equilateral triangle and the remaining 
     portion of the code displays the turtle which is positioned at coordinate (250, 500).
      </p>
-	     
+
       </section>
       <!-- --------------------------------------------------------------------------------------------------- -->
       <!-- --------------------------------------------------------------------------------------------------- -->
       <!-- --------------------------------------------------------------------------------------------------- -->
       <!-- --------------------------------------------------------------------------------------------------- -->
-	
+	Finally, we have reached the last portion of the experiment. Which is displayed below.
+  </p>
+	  
+ <section id="code">
+     <pre><code class="language-python">
+	     def dragon_curve(order, length, turn_direction):
+    if order == 0:
+        forward(length)
+    else:
+        new_length = length / (2 ** 0.5)
+
+        dragon_curve(order - 1, new_length, 1)   
+        right(turn_direction * 90)              
+        dragon_curve(order - 1, new_length, -1)  
+
+
+initializeTurtle()
+showturtle()
+
+ 
+jump(400, 400)
+face(0)              
+color('purple')      
+
+ 
+order = 10           
+length = 300         
+dragon_curve(order, length, 1)
+
+ 
+show()
+     </code></pre>
+       </p>
+	 
       </section>
       <!-- --------------------------------------------------------------------------------------------------- -->
       <!-- --------------------------------------------------------------------------------------------------- -->
       <!-- --------------------------------------------------------------------------------------------------- -->
       <!-- --------------------------------------------------------------------------------------------------- -->
+         In this code, the dragon_curve function was use to recursively draw the Dragon curve.
+	 The dragon curve is a self-similar fractal curves that can be created through recursive 
+	 approximations. The variables in this code are the order, the length, and the turn direction. 
+	 In this code, if the order is zero, the turtle moves forward in a straight line. But if the 
+	 order is something other than zero, then the turtle draws two different segments with new 
+	 length by computing the previous length over square root of 2 and then assign a turn between 
+	 them. The rest of this portion of the code just gives the turtle a new position, color the line 
+	 segments in purple, and calls the dragon curve function in order to replicate the shapes. 
+	 The order of the function is 10, and the length of each segment is set to be 300 pixels. The 
+	 show() function display the dragon-like fractal for visualization.
+  </p>
+	  
       </section>
 
       <!-- RESULTS & ANALYSIS SECTION -->
