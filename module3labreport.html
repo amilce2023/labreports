@@ -55,7 +55,7 @@
       <section id="introduction">
         <h2>Introduction</h2>
         <p>
-          This is a report for module 3 one of the course Fractal Geometry. In this module we are 
+          This is a report for module 3 of the course Fractal Geometry. In this module we are 
 	  experimenting with a Colab code that allows us to draw an equilateral triangle which we will
 	  recursively subdivide into smaller equilateral triangles to create an interesting self-similar 
 	  fractal known as Sierpiński triangle or Sierpiński gasket or Sierpiński sieve. In this lab report
@@ -69,70 +69,98 @@
 	<section id="code">
 	<pre><code class="language-python">                
 
-	from turtle_setup import 
-        import random
+	!wget -O turtle_setup.py 'https://raw.githubusercontent.com/williamedwardhahn/fractal25/refs/heads/main/turtle_setup.py'
+from turtle_setup import *
+	def draw_triangle(length):
+    for _ in range(3):
+        forward(length)
+        left(120)
 
   	show()
 	</code></pre>
-	The first segment of the code ensures that we import the necessary library to perform the 
-	experiment. We imported the turtle_setup module which is a library that will provide the 
-	turtle’s initialization functions and graphic functionalities followed by the random module 
-	that will generate random angles for the random walk of the turtle. They allow the user to 
-	initialize and control the graphics environment.
+	Since we are using turtle logo graphics for visualition, the segment of the code above first 
+	ensures that we import the necessary library to perform the experiment. After we imoport the turtle 
+	logo library, we define a function that will creat the triangle. The "for" loop enables the turtle
+	to draw the three sides of triangle with a forward motion that includes left turns of 120 degrees.
         </p>
 
 	<section id="code">
 	<pre><code class="language-python">
-	 canvas_width = 1000
-         canvas_height = 800
-         initializeTurtle(initial_window_size=(canvas_width, canvas_height), mode='auto')
+	 initializeTurtle()
+         showturtle()
+		
          </code></pre
 	 </p>
-	This portion of the code setup the canvas; the place that holds all the drawing elements of 
-	 the experiment.  The width and height are used to define the dimensions of the dimensions 
-	 of the canvas as an 800 X 1000 rectangle while the last part of this code begins the turtle 
-	 graphics with the specified window size. The mode = auto automatically sets the window 
-	 size of the turtle environment.
+	This portion of the code initialize the turtle graphics followed buy the showturtle() function
+	that is meant to help the user visualize the turtle on the canvas.
 	</p>
 
 	<section id="code">
 	<pre><code class="language-python">
-	 def random_walk(steps, step_length):
-         speed(0)              
-         penup() 
-         jump(450, 450)       
-         pendown()
+	 def draw_triangle(length):
+    for _ in range(3):
+        forward(length)
+        left(120)
 
-          for _ in range(steps):
-        forward(step_length)               
-        right(random.uniform(-180, 180))
-        steps = 1000
-        step_length = 10
-        show()
+          jump(300, 500)
+face(90)
+color('green')
+length = 400
+draw_triangle(length)
+
+show()
       </code></pre
       </p>
-	This code segment simulates random walk in which the turtle will move in randomly 
-	chosen directions for a given number of steps. speed(0) gives the drawing its maximum 
-	speed, penup() stops the turtle form drawing as it moves to the starting position by lifting 
-	the pen. jump() moves the turtle ot an indicated position and allows it to start drawing by 
-	lower the pen with the pendown() command. This portion of the code includes a “for” loop 
-	that moves the turtle forward by a certain step length then turn it to the right by some 
-	randomly chosden angles between -180 and 180 degrees. Then we executed the random 
-	walk by calling the function to allow the turtle to perform 1000 steps forward with each step 
-	having a distance of 10 units and the show() function allows us to visualize the walk by 
-	displaying it on the canvas. 
+	This code segment set up the turtle and guided its motion on the canvas. Once we have defined 
+	the function that will draw the triangle, we make sure that the turtle is at coordinate 
+	(300, 500), its face is at a 90-degree angle, and enable it to draw a green triangle will 
+	400 pixels in length. The show() function is used for visualization.
 	</p>
 
     <section id="code">
       <pre><code class="language-python">
-	 initializeTurtle()
-         showturtle()
-         jump(50, 400)
-         face(90)
+	 def sierpinski_triangle(length, order):
+    if order == 0:
+        draw_triangle(length)
+    else:
+        sierpinski_triangle(length / 2, order - 1)
+        forward(length / 2)
+        sierpinski_triangle(length / 2, order - 1)
+        backward(length / 2)
+        left(60)
+        forward(length / 2)
+        right(60)
+        sierpinski_triangle(length / 2, order - 1)
+        left(60)
+        backward(length / 2)
+        right(60)
+
+	initializeTurtle()
+showturtle()
+
+jump(300, 500)
+face(90)
+color('green')
+
+length = 400
+order =4
+sierpinski_triangle(length, order)
+
+show()
      </code></pre
      </p>
-         This code fragment reinitializes the turtle in the positions it at the coordinate 
-         (50, 400) and ensures its face is 90 degrees upward. 
+         This code fragment first consists of defining the function for the sierpeński triangle.
+	 It includes a conditional statement that sets the order of the sierpeński triangle. If
+	 the order is zero, then the turtle will just draw an equilateral triangle. Otherwise,
+	 the turtle will subdivide the original equilateral triangle based on the given order.
+	 In this experiment, we set the order to be four which means that the central smaller
+	 triangles will be removed from the bigger original triangle whose side length is 400 
+	 pixels, four times. When the order of the sierpeński is not zero, we need to define the 
+	 length of the smaller triangles. The code ensure each new length is the previous length 
+	 divided by 2 at each order level. The left and right commands ensure that each interior
+	 angle is 90 degrees. To start the shape, we reinitializes the turtle in the positions 
+	 at the coordinate (300, 500), colored the shape in green, and set the turtle's face 90
+	 degrees forward.
      </p>
 
        <section id="code">
