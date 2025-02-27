@@ -1,0 +1,597 @@
+
+
+
+<!-- INTRODUCTION SECTION -->
+<!-- --------------------------------------------------------------------------------------------------- -->
+<!-- --------------------------------------------------------------------------------------------------- -->
+<!-- --------------------------------------------------------------------------------------------------- -->
+<!-- --------------------------------------------------------------------------------------------------- -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Template for Fractal Geometry Computational Lab Reports" />
+  <link rel="stylesheet" href="https://latex.vercel.app/style.css" />
+  <link 
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism.min.css"
+  />
+  <script defer id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$','$$'], ['\\[','\\]']],
+      }
+    }
+  </script>
+  <title>Fractal Geometry Lab Report</title> 
+</head>
+<body id="top">
+
+
+
+
+  <header>
+    <h1>Fractal Geometry 
+	    Module 2 Lab Report</h1>
+    <p class="author">
+      Annkid Joseph Milcé <br />
+      02/21/2025
+    </p>
+  </header>
+  
+
+
+  <main>
+    <article class="indent-pars">
+      
+      <!-- INTRODUCTION SECTION -->
+      <!-- --------------------------------------------------------------------------------------------------- -->
+      <!-- --------------------------------------------------------------------------------------------------- -->
+      <!-- --------------------------------------------------------------------------------------------------- -->
+      <!-- --------------------------------------------------------------------------------------------------- -->
+      <section id="introduction">
+        <h2>Introduction</h2>
+        <p>
+          This is a report for module 2 one of the course Fractal Geometry. In this module we are 
+	  experimenting with a Colab code that allows us to draw fractal patterns from scratch using 
+	  Turtle Logo graphics. In the experiment, we started by drawing some random walk simulations 
+	  which we mprove by applying blip lines to recursively draw the fractal lines in increasing order.
+	  In the middle experiments, we tranform the random walks in Koch Snowflake fractal by using the blip
+	  line function. At the end of the experiment, the random walks were turned into a dragon curve
+	  fractal suing the dragon_curve function. Below, we provide the code segments with an explanation 
+          of the role played by what each code element.
+        </p>
+
+
+	
+	<section id="code">
+	<pre><code class="language-python">                
+
+	from turtle_setup import 
+        import random
+
+  	show()
+	</code></pre>
+	The first segment of the code ensures that we import the necessary library to perform the 
+	experiment. We imported the turtle_setup module which is a library that will provide the 
+	turtle’s initialization functions and graphic functionalities followed by the random module 
+	that will generate random angles for the random walk of the turtle. They allow the user to 
+	initialize and control the graphics environment.
+        </p>
+
+	<section id="code">
+	<pre><code class="language-python">
+	 canvas_width = 1000
+         canvas_height = 800
+         initializeTurtle(initial_window_size=(canvas_width, canvas_height), mode='auto')
+         </code></pre
+	 </p>
+	This portion of the code setup the canvas; the place that holds all the drawing elements of 
+	 the experiment.  The width and height are used to define the dimensions of the dimensions 
+	 of the canvas as an 800 X 1000 rectangle while the last part of this code begins the turtle 
+	 graphics with the specified window size. The mode = auto automatically sets the window 
+	 size of the turtle environment.
+	</p>
+
+	<section id="code">
+	<pre><code class="language-python">
+	 def random_walk(steps, step_length):
+         speed(0)              
+         penup() 
+         jump(450, 450)       
+         pendown()
+
+          for _ in range(steps):
+        forward(step_length)               
+        right(random.uniform(-180, 180))
+        steps = 1000
+        step_length = 10
+        show()
+      </code></pre
+      </p>
+	This code segment simulates random walk in which the turtle will move in randomly 
+	chosen directions for a given number of steps. speed(0) gives the drawing its maximum 
+	speed, penup() stops the turtle form drawing as it moves to the starting position by lifting 
+	the pen. jump() moves the turtle ot an indicated position and allows it to start drawing by 
+	lower the pen with the pendown() command. This portion of the code includes a “for” loop 
+	that moves the turtle forward by a certain step length then turn it to the right by some 
+	randomly chosden angles between -180 and 180 degrees. Then we executed the random 
+	walk by calling the function to allow the turtle to perform 1000 steps forward with each step 
+	having a distance of 10 units and the show() function allows us to visualize the walk by 
+	displaying it on the canvas. 
+	</p>
+
+    <section id="code">
+      <pre><code class="language-python">
+	 initializeTurtle()
+         showturtle()
+         jump(50, 400)
+         face(90)
+     </code></pre
+     </p>
+         This code fragment reinitializes the turtle in the positions it at the coordinate 
+         (50, 400) and ensures its face is 90 degrees upward. 
+     </p>
+
+       <section id="code">
+       <pre><code class="language-python">
+      forward(800 / 3)
+      left(60)
+      forward(800 / 3)
+      right(120)
+      forward(800 / 3)
+      left(60)
+      forward(800 / 3)
+
+      show()
+       </code></pre>
+       </p>
+       The code above uses left(), right(), and forwad() commands to create a shape by moving the
+       turtle in the commanded the indicated direction and displays the results with the show() 
+       function. In the context of this code, the turtle moves 800/3 pixels forward. Each left turn 
+       moves the turtle forward by 60 while each right turn moves it forward by 120 degrees. The 
+       final result are simple lines with blips which is a single segment of a fractal pattern. 
+       It is note that blip lines as used here means line with peak consisting or either downward
+       or upward slopes. 
+
+  <section id="code">
+     <pre><code class="language-python">
+      def blip_line(length, order):
+    if order == 0:
+        forward(length)
+    else:
+        blip_line(length / 3, order - 1)
+        left(60)
+        blip_line(length / 3, order - 1)
+        right(120)
+        blip_line(length / 3, order - 1)
+        left(60)
+        blip_line(length / 3, order - 1)
+
+initializeTurtle()
+
+jump(50, 400)
+face(90)
+color('red')
+blip_line(800, 1)   
+
+jump(50, 350)
+face(90)
+color('blue')
+blip_line(800, 2)   
+
+show()
+       </code></pre>
+       </p>
+	
+     <!-- --------------------------------------------------------------------------------------------------- -->
+      <!-- --------------------------------------------------------------------------------------------------- -->
+      <!-- --------------------------------------------------------------------------------------------------- -->
+	  
+       The code above started by defining a recursive blip _line function which will draw blips in 
+       lines at different order. The conditional “if … else”  loop allows the turtle to draw straight  
+       lines of a specified length if the order is zero while it will repeatedly draw smaller 
+       fractals-like pattern if the order of the blip if something else other than zero. The code 
+       was then extended to command the directions of the turtle; as such, the rest of this code 
+       repositions the turtle at the coordinate (50, 400), sets it face 90 degrees forward and color 
+       the 800 pixels line in red.  The segment ends by relocating the turtle at (50, 350) 90 degrees
+       forward, colors the line in blue, and displays the result by applying the show() function.
+  </p>
+
+ <section id="code">
+     <pre><code class="language-python">	
+      jump(50, 300)
+face(90)
+color('green')
+blip_line(800, 3)   
+show()
+ </code></pre>
+       </p>
+       This code segment draw a third blip line at location (50, 300) 90 degrees forward and uses 
+       the show() function to display an 800 pixels  green colored line with blip order 3. 
+ </p>
+	 
+ <section id="code">
+     <pre><code class="language-python">
+	     
+	def blip_line(length, order):
+    if order == 0:
+        forward(length)
+    else:
+        blip_line(length / 3, order - 1)
+        left(60)
+        blip_line(length / 3, order - 1)
+        right(120)
+        blip_line(length / 3, order - 1)
+        left(60)
+        blip_line(length / 3, order - 1)
+	     
+def koch_snowflake(length, order):
+    for _ in range(3):
+        blip_line(length, order)
+        right(120)
+	     
+jump(250, 500)
+face(0)
+color('blue')
+length = 400
+order = 3	     
+koch_snowflake(length, order)
+	     
+show()
+     </code></pre>
+     </p>
+	
+ </section>
+ <!-- --------------------------------------------------------------------------------------------------- -->
+ <!-- --------------------------------------------------------------------------------------------------- -->
+ <!-- --------------------------------------------------------------------------------------------------- -->
+ <!-- --------------------------------------------------------------------------------------------------- -->
+    This segment of code did the same work as the code above it with one exception. The 
+    exception is that the code was modified to create Koch Snowflakes, a type of fractal curves 
+    based on the Koch curve after the Swedish mathematician Helge von Koch who first 
+    mentioned it in 1904. To do that the Koch_snowflake function was defined. That function 
+    transforms the three previous blip lines into an equilateral triangle and the remaining 
+    portion of the code displays the turtle which is positioned at coordinate (250, 500).
+     </p>
+
+      </section>
+      <!-- --------------------------------------------------------------------------------------------------- -->
+      <!-- --------------------------------------------------------------------------------------------------- -->
+      <!-- --------------------------------------------------------------------------------------------------- -->
+      <!-- --------------------------------------------------------------------------------------------------- -->
+	Finally, we have reached the last portion of the experiment. Which is displayed below.
+  </p>
+	  
+ <section id="code">
+     <pre><code class="language-python">
+	     def dragon_curve(order, length, turn_direction):
+    if order == 0:
+        forward(length)
+    else:
+        new_length = length / (2 ** 0.5)
+
+        dragon_curve(order - 1, new_length, 1)   
+        right(turn_direction * 90)              
+        dragon_curve(order - 1, new_length, -1)  
+
+
+initializeTurtle()
+showturtle()
+
+ 
+jump(400, 400)
+face(0)              
+color('purple')      
+
+ 
+order = 10           
+length = 300         
+dragon_curve(order, length, 1)
+
+ 
+show()
+     </code></pre>
+       </p>
+	 
+      </section>
+      <!-- --------------------------------------------------------------------------------------------------- -->
+      <!-- --------------------------------------------------------------------------------------------------- -->
+      <!-- --------------------------------------------------------------------------------------------------- -->
+      <!-- --------------------------------------------------------------------------------------------------- -->
+         In this code, the dragon_curve function was use to recursively draw the Dragon curve.
+	 The dragon curve is a self-similar fractal curves that can be created through recursive 
+	 approximations. The variables in this code are the order, the length, and the turn direction. 
+	 In this code, if the order is zero, the turtle moves forward in a straight line. But if the 
+	 order is something other than zero, then the turtle draws two different segments with new 
+	 length by computing the previous length over square root of 2 and then assign a turn between 
+	 them. The rest of this portion of the code just gives the turtle a new position, color the line 
+	 segments in purple, and calls the dragon curve function in order to replicate the shapes. 
+	 The order of the function is 10, and the length of each segment is set to be 300 pixels. The 
+	 show() function display the dragon-like fractal for visualization.
+  </p>
+	  
+      </section>
+
+      <!-- RESULTS & ANALYSIS SECTION -->
+      <!-- --------------------------------------------------------------------------------------------------- -->
+      <!-- --------------------------------------------------------------------------------------------------- -->
+      <!-- --------------------------------------------------------------------------------------------------- -->
+      <!-- --------------------------------------------------------------------------------------------------- -->
+      <section id="results">
+      
+      
+        <h2>Results &amp; Analysis</h2>
+        <p>
+         The first portion of the code was meant to create some random paths drawn by moving the turtle 
+	 in different dirrections at different angles. Observe from the picture in Figure 1 how chaotic
+	 the paths are. This is explained by the randomness of the movement of the turtle resulting in an
+	 unorganised shape.
+
+		
+        <figure>
+          <img
+            src=" https://amilce2023.github.io/labreports/module2image1.png"
+            width="1000"
+            height="800"
+            loading="lazy"
+          />
+          <figcaption>
+            <strong></strong> Picture of the random walk performed by the turtle.
+          </figcaption>
+        </figure>
+
+      <!-- --------------------------------------------------------------------------------------------------- -->
+        </p>
+        To organize the random walk, we apply the blip lines function in order to rearrange the paths into 
+	a fractal-like shape. Figure 2 shows the starting point of the process in which the code was modified
+	to transform the random walk into a blip lines of order 1 consisting of downward and upward slopes.
+
+	<!-- --------------------------------------------------------------------------------------------------- -->
+        </p>
+
+        <figure>
+          <img
+            src=" https://amilce2023.github.io/labreports/module2image2.png"
+            width="600"
+            height="400"
+            loading="lazy"
+          />
+          <figcaption>
+            <strong></strong> Initial line to create the path of the turtle with blips between the lines.
+          </figcaption>
+        </figure>
+	
+      <!-- --------------------------------------------------------------------------------------------------- -->
+        </p>
+	The next two pictures illustrate how the code was modified to now reorganize the random walk into 
+	a more intricate shape by creating blip lines of order 2 and order 3. Observe that at this point,
+	the walk start assuming a fractsal-like pattern.
+
+      <!-- --------------------------------------------------------------------------------------------------- -->
+        </p>
+
+        <figure>
+          <img
+            src=" https://amilce2023.github.io/labreports/module2image3.png"
+            width="600"
+            height="400"
+            loading="lazy"
+          />
+          <figcaption>
+            <strong></strong> Path created by the turtle with blip lines of orders 1 and 2.
+            <strong></strong> Blit lines of colors red are of oder 1 while blit lines of order 2 are in blue.              
+		  
+          </figcaption>
+        </figure>
+
+      <!-- --------------------------------------------------------------------------------------------------- -->
+        </p>
+
+        <figure>
+          <img
+            src=" https://amilce2023.github.io/labreports/module2image4.png"
+            width="600"
+            height="400"
+            loading="lazy"
+          />
+          <figcaption>
+            <strong></strong> Starting the snowflake fractal by creating blit lines of order 3.
+	     
+          </figcaption>
+        </figure>
+
+      <!-- --------------------------------------------------------------------------------------------------- -->
+        </p>
+	Figure 5 shows how the random walk become increasing more complex as we apply the Koch Curve function
+	of different order to create a snowflake fractal showcasing the self-similarity patterns depicted in 
+	fractals.
+	    
+      <!-- --------------------------------------------------------------------------------------------------- -->
+        </p>
+
+        <figure>
+          <img
+            src=" https://amilce2023.github.io/labreports/module2image5.png"
+            width="600"
+            height="400"
+            loading="lazy"
+          />
+          <figcaption>
+            <strong></strong> Applying the Koch Curve function to create a Snowflake fractal.
+          </figcaption>
+        </figure>
+
+      <!-- --------------------------------------------------------------------------------------------------- -->
+        </p>
+
+	Finally, we use the Dragon Curve function to illustrate a more unique pattern in the shape of a dragon.
+	This results in an even more complex shape than the previous ones. Over all, the picture in Figurew 6 
+	combines all the results from Figures 1, 2, 3, 4, and 5 to produce a dynamic visual representsation 
+	of the random walk by creating fractals-like patterns. The result combines different mathematical
+	concepts, such as recursion, self-similarity, and transformations. 
+
+	  <!-- --------------------------------------------------------------------------------------------------- -->
+        </p>	
+        <figure>
+          <img
+            src=" https://amilce2023.github.io/labreports/module2image6.png"
+            width="600"
+            height="400"
+            loading="lazy"
+          />
+          <figcaption>
+            <strong></strong> Applying the dragon curve function to transform the snowflake fractal
+	    <strong></strong> into a dragon-shape fractal.
+		  
+          </figcaption>
+        </figure>
+      <!-- --------------------------------------------------------------------------------------------------- -->
+      <!-- --------------------------------------------------------------------------------------------------- -->
+      <!-- --------------------------------------------------------------------------------------------------- -->
+      <!-- --------------------------------------------------------------------------------------------------- -->
+        </p>
+
+
+
+    </section>
+       </p>
+	Below we provide an extension of the code.
+       </p>
+	      
+
+      <!-- --------------------------------------------------------------------------------------------------- -->
+      <!-- --------------------------------------------------------------------------------------------------- -->
+      <!-- --------------------------------------------------------------------------------------------------- -->
+      <!-- --------------------------------------------------------------------------------------------------- -->
+	<section id="code">
+	<pre><code class="language-python">
+	                  
+canvas_width = 1000
+canvas_height = 800
+initializeTurtle(initial_window_size=(canvas_width, canvas_height), mode='auto')
+
+import random
+import math
+
+def random_color():
+    r = random.random()
+    g = random.random()
+    b = random.random()
+    return color_rgb(r, g, b)
+
+def draw_polygon(n_sides, side_length):
+    angle = 360 / n_sides  
+    for _ in range(n_sides):
+        forward(side_length)
+        right(angle)
+
+start_x = 100  # Start at x = 200 
+start_y = 300  # Start at y = 300 
+jump(start_x, start_y)  
+
+side_length = 20   
+spacing = 20   
+for n_sides in range(3, 20):
+    color(random_color())   
+    draw_polygon(n_sides, side_length)   
+    penup()   
+    jump(getx() + spacing + side_length, start_y)   
+    pendown()   
+
+show()
+	</code></pre>
+
+
+		
+     </section>
+
+
+	      
+	We first set up the dimensions of the canvas which in this experiment is an 800 X 1000 rectangle.
+	In the second portion of the code, we import the random() and math() libraries that help 
+	selecting random colors and help with the mathematical steps needed to draw the polygons. 
+	The third section of the code is really crucial because in there we defined the polygon
+	with its number of sides and sides length. We use the formula angle = 360/n to measure the 
+	exterior angles of each polygon followed by a "for" loop deifned the sides length and the 
+	exterior angles for each new polygon. The penultimate part of the code has a "for" loop that 
+	set the polygons from a triangle, a 3-sided polygon to an icosagon, a 20-sided polygon. 
+	The penup() and pendown() commands indicates whether the turtle picks up the tail of the 
+	turtle so that it draws or do not draw the shapes, respectively. The ultimate portion of
+	the code uses the show() function to print the polygons as can be seen below.
+	      
+
+
+	        <figure>
+          <img
+            src=" https://amilce2023.github.io/labreports/movingpolygons.png"
+            width="1000"
+            height="800"
+            loading="lazy"
+          />
+          <figcaption>
+            <strong></strong> Moving Polygons created by the turtle in the canvas.
+          </figcaption>
+        </figure>
+      <!-- --------------------------------------------------------------------------------------------------- -->
+      <!-- --------------------------------------------------------------------------------------------------- -->
+      <!-- --------------------------------------------------------------------------------------------------- -->
+      <!-- --------------------------------------------------------------------------------------------------- -->
+        </p>
+      
+      </section>
+
+
+
+      <!-- CONCLUSION SECTION -->
+      <!-- --------------------------------------------------------------------------------------------------- -->
+      <!-- --------------------------------------------------------------------------------------------------- -->
+      <!-- --------------------------------------------------------------------------------------------------- -->
+      <!-- --------------------------------------------------------------------------------------------------- -->
+      <section id="conclusion">
+        <h2>Conclusion</h2>
+        <p>
+	In conclusion, this report highlights the steps that we used to generate a code that introduce us to 
+	Logo to the Logo programming langiage via the use of Turtle Graphics. We experimented with three codes
+	segments. The first part of the code was provide and we used to visualize a square drwan by a turtle
+	moving on a canvas. In the second section of the experiment, we modified the given code to create a
+	bigger square at a different location with a different colors for the background and the square.
+	At the end, we experimented with a different code segment that allows us to create moving polygons
+	from a triangle to an icosagon. This was a fascinating experiment in wehich we learn how to command 
+	the computer to do what we want it to do; a cool way to learn from experiments and observations.
+		
+         </p>
+      </section>
+
+     
+     
+
+      <!-- REFERENCE SECTION -->
+      <!-- --------------------------------------------------------------------------------------------------- -->
+      <!-- --------------------------------------------------------------------------------------------------- -->
+      <!-- --------------------------------------------------------------------------------------------------- -->
+      <!-- --------------------------------------------------------------------------------------------------- -->
+      <section id="conclusion">
+        <h2>References</h2>
+        <p>     
+        https://en.wikipedia.org/wiki/Logo_(programming_language)
+
+	</p>
+      
+      </section>
+		
+	https://www.youtube.com/watch?v=NGmNvRXMhac
+   
+         </p>
+	    
+     
+     
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-python.min.js"></script>
+</body>
+</html>
