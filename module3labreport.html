@@ -205,13 +205,13 @@ def plot(x):
     plt.show()
        </code></pre>
        </p>
-       The code above uses left(), right(), and forwad() commands to create a shape by moving the
-       turtle in the commanded the indicated direction and displays the results with the show() 
-       function. In the context of this code, the turtle moves 800/3 pixels forward. Each left turn 
-       moves the turtle forward by 60 while each right turn moves it forward by 120 degrees. The 
-       final result are simple lines with blips which is a single segment of a fractal pattern. 
-       It is note that blip lines as used here means line with peak consisting or either downward
-       or upward slopes. 
+	       
+       The code above starts by importing two important libraries: the numpy and matplotlib libraries.
+       The numpy library is used to facilitate numerical operations while the matplotlib will be used
+       for plotting. In that segment of code, the plot(x) function will plot a 2D array as a grayscale
+       color map with the axis hidden using the ax.axis(off) and the plt.show() function to
+       visualize the plot. The 2D array represents the 10 x 10 cellular automaton grid. It is to note
+       that aspect="auto" is used to keep correct proportions.
 
   <section id="code">
      <pre><code class="language-python">
@@ -239,14 +239,12 @@ rule[1,1,1] = 0
       <!-- --------------------------------------------------------------------------------------------------- -->
       <!-- --------------------------------------------------------------------------------------------------- -->
 	  
-       The code above started by defining a recursive blip _line function which will draw blips in 
-       lines at different order. The conditional “if … else”  loop allows the turtle to draw straight  
-       lines of a specified length if the order is zero while it will repeatedly draw smaller 
-       fractals-like pattern if the order of the blip if something else other than zero. The code 
-       was then extended to command the directions of the turtle; as such, the rest of this code 
-       repositions the turtle at the coordinate (50, 400), sets it face 90 degrees forward and color 
-       the 800 pixels line in red.  The segment ends by relocating the turtle at (50, 350) 90 degrees
-       forward, colors the line in blue, and displays the result by applying the show() function.
+       The code above redefines the array. It now in itializes a 100 x 100 array that is filled with zeros.
+       C[0, 50] = 1 sets an initial condition that a single cell represents a "1" in the middle of the first row.
+       It also prints the binary representation of the number 90 using the function num = 90 and print the result 
+       which is given by 01011010. A rule was applied using the function rule = np.zeros((2, 2, 2)) as a way to 
+       initialize a 3D array to hold the rule cellular automaton. The rule is define in the remaining portion 
+       of the code where each position corresponds to the state of the three neighboring cells.
   </p>
 
  <section id="code">
@@ -267,8 +265,13 @@ rule[1,1,1] = 0
 plot(CA(C))
  </code></pre>
        </p>
-       This code segment draw a third blip line at location (50, 300) 90 degrees forward and uses 
-       the show() function to display an 800 pixels  green colored line with blip order 3. 
+       This code segment uses the function CA(X) to to apply the rule for the cellular automaton to the array.
+       It is followed by two "for" loops that will iterate the over the rows and the columns. Each iteration on 
+       the rows exlcudes the first row and the the first column, and the function X[i, j] update the state of
+       of the cell based on the rule and neighboring states. observe that N, NW, and NE are defined to get
+       the states of the neighboring cells. N gets the state of the current cell above, NW gets the state of
+       the upper-left cell, and NE gets the state of the upper-right cell. The function "return X" will return
+       the update array and the function "plot(CA(C))" helps visualize the results. 
  </p>
 	 
  <section id="code">
@@ -297,12 +300,12 @@ for rule in [30, 62, 90, 110, 126]:
  <!-- --------------------------------------------------------------------------------------------------- -->
  <!-- --------------------------------------------------------------------------------------------------- -->
  <!-- --------------------------------------------------------------------------------------------------- -->
-    This segment of code did the same work as the code above it with one exception. The 
-    exception is that the code was modified to create Koch Snowflakes, a type of fractal curves 
-    based on the Koch curve after the Swedish mathematician Helge von Koch who first 
-    mentioned it in 1904. To do that the Koch_snowflake function was defined. That function 
-    transforms the three previous blip lines into an equilateral triangle and the remaining 
-    portion of the code displays the turtle which is positioned at coordinate (250, 500).
+    This last segment of code does a similar job to the previous code segment. It uses a fucntion that 
+    applies the the cellular automaton rules to the the array but it is implemented in a different way 
+    as can be seen the provided codes. It sets a rule number; namely the number 90 and plot the the results
+    of the cellular automaton by applying the plot(CA(C)) function to plot the results. The experiment is
+    concluded by running the cellular automaton for different rules for rule 30, 62, 90, 110, and 126 and 
+    by using the plot(CA(C)) to see the results. 
      </p>
 
       </section>
@@ -349,18 +352,7 @@ show()
       <!-- --------------------------------------------------------------------------------------------------- -->
       <!-- --------------------------------------------------------------------------------------------------- -->
       <!-- --------------------------------------------------------------------------------------------------- -->
-         In this code, the dragon_curve function was use to recursively draw the Dragon curve.
-	 The dragon curve is a self-similar fractal curves that can be created through recursive 
-	 approximations. The variables in this code are the order, the length, and the turn direction. 
-	 In this code, if the order is zero, the turtle moves forward in a straight line. But if the 
-	 order is something other than zero, then the turtle draws two different segments with new 
-	 length by computing the previous length over square root of 2 and then assign a turn between 
-	 them. The rest of this portion of the code just gives the turtle a new position, color the line 
-	 segments in purple, and calls the dragon curve function in order to replicate the shapes. 
-	 The order of the function is 10, and the length of each segment is set to be 300 pixels. The 
-	 show() function display the dragon-like fractal for visualization.
-  </p>
-	  
+         
       </section>
 
       <!-- RESULTS & ANALYSIS SECTION -->
