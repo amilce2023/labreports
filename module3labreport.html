@@ -177,6 +177,59 @@ show()
 	 colored the shape in green, and set the turtle's face 90 degrees forward.
      </p>
 
+    </code></pre>
+    </p>
+	Below we provide a modified and extended version of the code for the sierpiński triangle.
+    </p>
+
+<section id="code">
+      <pre><code class="language-python">
+!wget -O turtle_setup.py 'https://raw.githubusercontent.com/williamedwardhahn/fractal25/refs/heads/main/turtle_setup.py'
+from turtle_setup import *
+import random
+
+def draw_triangle(length, color):
+    fillcolor(color)  
+    begin_fill()    
+    for _ in range(3):
+        forward(length)
+        left(120)
+    end_fill()       
+
+initializeTurtle()
+showturtle()
+
+def sierpinski_triangle(length, order):
+    if order == 0:
+        draw_triangle(length, random_color())
+    else:
+        sierpinski_triangle(length / 2, order - 1)
+        forward(length / 2)
+        sierpinski_triangle(length / 2, order - 1)
+        backward(length / 2)
+        left(60)
+        forward(length / 2)
+        right(60)
+        sierpinski_triangle(length / 2, order - 1)
+        left(60)
+        backward(length / 2)
+        right(60)
+
+def random_color():
+    return f'#{random.randint(0, 0xFFFFFF):06x}'
+
+length = int(input("Enter the length of the triangle: "))
+order = int(input("Enter the order of the Sierpinski triangle (0-5): "))
+
+jump(300, 500)
+face(90) 
+
+sierpinski_triangle(length, order)
+
+show()
+</code></pre
+     </p>
+	
 </section>
 
       <!-- Cellular Automata -->
