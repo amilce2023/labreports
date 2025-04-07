@@ -318,34 +318,79 @@ for rule in [30, 62, 90, 110, 126]:
 	  
  <section id="code">
      <pre><code class="language-python">
-	     def dragon_curve(order, length, turn_direction):
-    if order == 0:
-        forward(length)
-    else:
-        new_length = length / (2 ** 0.5)
+	     d 
+	import numpy as np
+import matplotlib.pyplot as plt
 
-        dragon_curve(order - 1, new_length, 1)   
-        right(turn_direction * 90)              
-        dragon_curve(order - 1, new_length, -1)  
+def plot(x, title):
 
+    fig, ax = plt.subplots()
+    im = ax.imshow(x, cmap='gray', interpolation='none')
+    ax.axis('off')
+    ax.set_title(title, fontsize=16)
+    fig.set_size_inches(10, 10)
+    plt.show()
 
-initializeTurtle()
-showturtle()
+def initialize_grid(size):
+     
+    C = np.zeros((size, size), dtype=int)
+    C[0, size // 2] = 1
+    return C
 
- 
-jump(400, 400)
-face(0)              
-color('purple')      
+def get_rule(rule_number):
+     
+    binary_rule = np.array(list(np.binary_repr(rule_number, width=8)), dtype=int)[::-1]
 
- 
-order = 10           
-length = 300         
-dragon_curve(order, length, 1)
+    rule_array = np.zeros((2, 2, 2), dtype=int)
+    for i in range(8):
+        pattern = f'{i:03b}' 
+        nw, n, ne = map(int, pattern)
+        rule_array[nw, n, ne] = binary_rule[i]
+   
+    return rule_array
 
- 
-show()
+def CA(X, rule):
+    
+    rule_array = get_rule(rule)
+   
+    for i in range(1, X.shape[0]-1):
+        for j in range(1, X.shape[1]-1):
+            NW = X[i-1, j-1]
+            N  = X[i-1, j]
+            NE = X[i-1, j+1]
+            X[i, j] = rule_array[NW, N, NE]
+
+    return X
+
+def run_simulation(rule, generations=100):
+     
+    size = generations
+    C = initialize_grid(size)
+   
+    for gen in range(generations):
+        if gen % 10 == 0:
+            plot(C, f'Rule {rule} - Generation {gen}')
+        C = CA(C, rule)
+   
+    plot(C, f'Rule {rule} - Final Generation')
+
+rules_to_simulate = [30, 62, 90, 110, 126]
+
+for rule in rules_to_simulate:
+    run_simulation(rule, generations=100)
      </code></pre>
        </p>
+	Above is a modified version of the original code that enhance it provide clarity, functionality,
+	and interactivity. With that version, the user is able to select different rules and is able to
+	visualize the results over many generations. To improve the code readbility, the separate function
+	initialize_grid was used and the run_simulation function was introduced to handle the process of
+	initializing the grid, applying the rule, and plotting the results over a given number of generations.
+	A second modification was to that of adding the get_rule funtion in orderto facilitate the application 
+	of rules to the cellular automaton by converting a rule number into a 3D array. To easily identify each
+	plot, titles are included to indicate the current generation along with the rule number. It is worth 
+	notice that plots are generated for every 10 generations as a way to reduce clutter and to focus on
+	significant changes as time elapses. The final generation is plotted after all iterations to give a 
+        clear view of the final state of each rule.
 	 
       </section>
       <!-- --------------------------------------------------------------------------------------------------- -->
