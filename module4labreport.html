@@ -1,1 +1,339 @@
 
+
+<!-- INTRODUCTION SECTION -->
+<!-- --------------------------------------------------------------------------------------------------- -->
+<!-- --------------------------------------------------------------------------------------------------- -->
+<!-- --------------------------------------------------------------------------------------------------- -->
+<!-- --------------------------------------------------------------------------------------------------- -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Template for Fractal Geometry Computational Lab Reports" />
+  <link rel="stylesheet" href="https://latex.vercel.app/style.css" />
+  <link 
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism.min.css"
+  />
+  <script defer id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$','$$'], ['\\[','\\]']],
+      }
+    }
+  </script>
+  <title>Fractal Geometry Lab Report</title> 
+</head>
+<body id="top">
+
+
+
+
+  <header>
+    <h1>Fractal Geometry 
+	    Module 4 Lab Report</h1>
+    <p class="author">
+      Annkid Joseph Milcé <br />
+      04/07/2025
+    </p>
+  </header>
+  
+
+
+  <main>
+    <article class="indent-pars">
+      
+      <!-- INTRODUCTION SECTION -->
+      <!-- --------------------------------------------------------------------------------------------------- -->
+      <!-- --------------------------------------------------------------------------------------------------- -->
+      <!-- --------------------------------------------------------------------------------------------------- -->
+      <!-- --------------------------------------------------------------------------------------------------- -->
+      <section id="introduction">
+        <h2>Introduction</h2>
+        <p>
+          This is a report for module 4 one of the course Fractal Geometry. 
+          In this module we experiment with a Colab code that will help us to draw a fractsl three by recursion.
+          In this experiment, the type of fractal genersted by the code is called a fracvtal canopy. To obtain it,
+          each canopy comes from spliting  a line segment into two smaller segments at the end, then split the two 
+          smaller segments, and keep doing so infinitely. We explore the the code in the sections below. 
+        </p>
+     
+	<!-- ------------------------------------------------------------------------------------------------- -->
+	<!-- ------------------------------------------------------------------------------------------------- -->
+	<!-- ------------------------------------------------------------------------------------------------- -->
+	<!-- ------------------------------------------------------------------------------------------------- -->
+	<section id="code">
+	<pre><code class="language-python">                
+!wget -O turtle_setup.py 'https://raw.githubusercontent.com/williamedwardhahn/fractal25/refs/heads/main/turtle_setup.py'
+from turtle_setup import *
+
+    def fractal_tree(length, depth):
+    if depth == 0:
+        return
+    else:
+        forward(length)
+        left(30)
+        fractal_tree(length * 0.7, depth - 1)
+        right(60)
+        fractal_tree(length * 0.7, depth - 1)
+        left(30)
+        backward(length)
+  	initializeTurtle(initial_window_size=(500, 500))   
+jump(250, 450) 
+face(0)
+color('green')
+length = 100 
+depth = 7  
+fractal_tree(length, depth)
+show()
+	</code></pre>
+
+	    <pre><code class="language-python">
+
+	#Modified Code
+		    
+	initializeTurtle()
+	showturtle()
+	color('white')
+	bgcolor('skyblue')
+
+	jump(500, 500)
+	face(0)
+		    
+	for _ in range(4):
+  	forward(300)
+ 	 right(270)
+
+ 	#Display the drawing
+  	show()    
+	</code></pre>
+
+	    
+      </section>
+
+      <!-- RESULTS & ANALYSIS SECTION -->
+      <!-- --------------------------------------------------------------------------------------------------- -->
+      <!-- --------------------------------------------------------------------------------------------------- -->
+      <!-- --------------------------------------------------------------------------------------------------- -->
+      <!-- --------------------------------------------------------------------------------------------------- -->
+      <section id="results">
+      
+      
+        <h2>Results &amp; Analysis</h2>
+        <p>
+          This experiment is conducted by generating a Google Colab code that creates a square by
+	  moving a turtle on a canvas. The first part of the code consisted in importing the Turtle
+	  Library. This library allows the creation of the square by moving the turtle to create lines.
+	  The function initializeTurtle() sets up the turtle environment while the showturtle() makes 
+	  the turtle visible to the user. The functions color() and bgcolor() were used to change the 
+	  pen color and set the background color, respectively. Having initializing the turtle, the
+	  functions jump() and face() were used to move the turtle to a suitable position as desired.
+	  It is important to note that since we want to create a square, a "for" loop was used to 
+	  to create the sides of the square. In this loop, the for_in range(4) allows to draw the 4 
+          the four sides of the square. In this experiment each side was set to be 100 units long 
+	  using the forward() function followed by the right() fucntion to turn the turtle a certain 
+          degrees to the right, and thus forming the corners of the square. Finally, the show()
+	  function displays the final drawing after the square was drawn. 
+
+
+      </section>
+      <!-- --------------------------------------------------------------------------------------------------- -->
+      <!-- --------------------------------------------------------------------------------------------------- -->
+      <!-- --------------------------------------------------------------------------------------------------- -->
+      <!-- --------------------------------------------------------------------------------------------------- -->
+        </p>
+        In the modified portion of the code, the same functions and commands were used. However, the
+        turtle starting position was set at the coordinates (500, 500) using the the command jump 
+	(500, 500). We also increased the sides length of the square by 200 units more and turned the
+	turtle 270 degrees to the right. We also changed the background color from white to sky blue,
+	and make the pen clor white. 
+	      
+	      
+
+	
+      <!-- --------------------------------------------------------------------------------------------------- -->
+      <!-- --------------------------------------------------------------------------------------------------- -->
+      <!-- --------------------------------------------------------------------------------------------------- -->
+      <!-- --------------------------------------------------------------------------------------------------- -->
+        </p>
+	The results from both codes can be seen in the diagrams below.
+
+
+
+        <figure>
+          <img
+            src=" https://amilce2023.github.io/labreports/turtlegraphic1.png"
+            width="1000"
+            height="800"
+            loading="lazy"
+          />
+          <figcaption>
+            <strong></strong> A square drawn by moving the turtle in the canvas.
+          </figcaption>
+        </figure>
+	      
+      <!-- --------------------------------------------------------------------------------------------------- -->
+        </p>
+
+        <figure>
+          <img
+            src=" https://amilce2023.github.io/labreports/turtlegraphic2.png"
+            width="600"
+            height="400"
+            loading="lazy"
+          />
+          <figcaption>
+            <strong></strong> A square drawn by moving the turtle in the canvas.
+          </figcaption>
+        </figure>
+      <!-- --------------------------------------------------------------------------------------------------- -->
+      <!-- --------------------------------------------------------------------------------------------------- -->
+      <!-- --------------------------------------------------------------------------------------------------- -->
+      <!-- --------------------------------------------------------------------------------------------------- -->
+        </p>
+
+
+
+    </section>
+       </p>
+	Now we turn our attention to the second part of the experiment. In this part, we generatred a
+	code that aims at drawing moving polygons on the canvas. The code is shown below.
+       </p>
+	      
+
+      <!-- --------------------------------------------------------------------------------------------------- -->
+      <!-- --------------------------------------------------------------------------------------------------- -->
+      <!-- --------------------------------------------------------------------------------------------------- -->
+      <!-- --------------------------------------------------------------------------------------------------- -->
+	<section id="code">
+	<pre><code class="language-python">
+	                  
+canvas_width = 1000
+canvas_height = 800
+initializeTurtle(initial_window_size=(canvas_width, canvas_height), mode='auto')
+
+import random
+import math
+
+def random_color():
+    r = random.random()
+    g = random.random()
+    b = random.random()
+    return color_rgb(r, g, b)
+
+def draw_polygon(n_sides, side_length):
+    angle = 360 / n_sides  
+    for _ in range(n_sides):
+        forward(side_length)
+        right(angle)
+
+start_x = 100  # Start at x = 200 
+start_y = 300  # Start at y = 300 
+jump(start_x, start_y)  
+
+side_length = 20   
+spacing = 20   
+for n_sides in range(3, 20):
+    color(random_color())   
+    draw_polygon(n_sides, side_length)   
+    penup()   
+    jump(getx() + spacing + side_length, start_y)   
+    pendown()   
+
+show()
+	</code></pre>
+
+
+		
+     </section>
+
+
+	      
+	We first set up the dimensions of the canvas which in this experiment is an 800 X 1000 rectangle.
+	In the second portion of the code, we import the random() and math() libraries that help 
+	selecting random colors and help with the mathematical steps needed to draw the polygons. 
+	The third section of the code is really crucial because in there we defined the polygon
+	with its number of sides and sides length. We use the formula angle = 360/n to measure the 
+	exterior angles of each polygon followed by a "for" loop deifned the sides length and the 
+	exterior angles for each new polygon. The penultimate part of the code has a "for" loop that 
+	set the polygons from a triangle, a 3-sided polygon to an icosagon, a 20-sided polygon. 
+	The penup() and pendown() commands indicates whether the turtle picks up the tail of the 
+	turtle so that it draws or do not draw the shapes, respectively. The ultimate portion of
+	the code uses the show() function to print the polygons as can be seen below.
+	      
+
+
+	        <figure>
+          <img
+            src=" https://amilce2023.github.io/labreports/movingpolygons.png"
+            width="1000"
+            height="800"
+            loading="lazy"
+          />
+          <figcaption>
+            <strong></strong> Moving Polygons created by the turtle in the canvas.
+          </figcaption>
+        </figure>
+      <!-- --------------------------------------------------------------------------------------------------- -->
+      <!-- --------------------------------------------------------------------------------------------------- -->
+      <!-- --------------------------------------------------------------------------------------------------- -->
+      <!-- --------------------------------------------------------------------------------------------------- -->
+        </p>
+      
+      </section>
+
+
+
+      <!-- CONCLUSION SECTION -->
+      <!-- --------------------------------------------------------------------------------------------------- -->
+      <!-- --------------------------------------------------------------------------------------------------- -->
+      <!-- --------------------------------------------------------------------------------------------------- -->
+      <!-- --------------------------------------------------------------------------------------------------- -->
+      <section id="conclusion">
+        <h2>Conclusion</h2>
+        <p>
+	In conclusion, this report highlights the steps that we used to generate a code that introduce us to 
+	Logo to the Logo programming langiage via the use of Turtle Graphics. We experimented with three codes
+	segments. The first part of the code was provide and we used to visualize a square drwan by a turtle
+	moving on a canvas. In the second section of the experiment, we modified the given code to create a
+	bigger square at a different location with a different colors for the background and the square.
+	At the end, we experimented with a different code segment that allows us to create moving polygons
+	from a triangle to an icosagon. This was a fascinating experiment in wehich we learn how to command 
+	the computer to do what we want it to do; a cool way to learn from experiments and observations.
+		
+         </p>
+      </section>
+
+     
+     
+
+      <!-- REFERENCE SECTION -->
+      <!-- --------------------------------------------------------------------------------------------------- -->
+      <!-- --------------------------------------------------------------------------------------------------- -->
+      <!-- --------------------------------------------------------------------------------------------------- -->
+      <!-- --------------------------------------------------------------------------------------------------- -->
+      <section id="conclusion">
+        <h2>References</h2>
+        <p>     
+        https://en.wikipedia.org/wiki/Logo_(programming_language)
+
+	</p>
+      
+      </section>
+		
+	https://www.youtube.com/watch?v=NGmNvRXMhac
+   
+         </p>
+	    
+     
+     
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-python.min.js"></script>
+</body>
+</html>
+
