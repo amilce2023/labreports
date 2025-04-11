@@ -70,7 +70,7 @@
 !wget -O turtle_setup.py 'https://raw.githubusercontent.com/williamedwardhahn/fractal25/refs/heads/main/turtle_setup.py'
 from turtle_setup import *
 
-    def fractal_tree(length, depth):
+def fractal_tree(length, depth):
     if depth == 0:
         return
     else:
@@ -81,7 +81,8 @@ from turtle_setup import *
         fractal_tree(length * 0.7, depth - 1)
         left(30)
         backward(length)
-  	initializeTurtle(initial_window_size=(500, 500))   
+		
+initializeTurtle(initial_window_size=(500, 500))   
 jump(250, 450) 
 face(0)
 color('green')
@@ -90,28 +91,86 @@ depth = 7
 fractal_tree(length, depth)
 show()
 	</code></pre>
+The code above is a function whose objective is to draw the fractal tree recursively after importing the necessary
+library. The base case for the recursion formula is zero which means that the depth is zero, the recursion stops.
+Otherwise, the turtle will move forward by a certain length. To create the branches, the turtle turns 30 degrees
+left and 60 degrees to draw a subtree before making another turn 30 degrees left to return to its original position.
+As for the turtle environment, the turtle is positioned canvas size is positioned at coordinate (250, 450) in a
+500 X 500 window. It is colored in green with its face set 0 degree to the right. The length of the main trunk is
+is set to 100 and the depth of the recursion which set the number of branching level is 7. The "show()" function is 
+used for visualization as shown below.
+</p>
 
-	    <pre><code class="language-python">
-
-	#Modified Code
-		    
-	initializeTurtle()
-	showturtle()
-	color('white')
-	bgcolor('skyblue')
-
-	jump(500, 500)
-	face(0)
-		    
-	for _ in range(4):
-  	forward(300)
- 	 right(270)
-
- 	#Display the drawing
-  	show()    
-	</code></pre>
-
+<figure>
+          <img
+            src=" https://amilce2023.github.io/labreports/turtlegraphic1.png"
+            width="1000"
+            height="800"
+            loading="lazy"
+          />
+          <figcaption>
+            <strong></strong> A square drawn by moving the turtle in the canvas.
+          </figcaption>
+        </figure>
+	      
+      <!-- --------------------------------------------------------------------------------------------------- -->
+        </p>
+		
+<!-- ------------------------------------------------------------------------------------------------- -->
+<!-- ------------------------------------------------------------------------------------------------- -->
+<!-- ------------------------------------------------------------------------------------------------- -->
+<!-- ------------------------------------------------------------------------------------------------- -->
 	    
+        <section id="code">
+	<pre><code class="language-python">  
+def build_tree(branch_length, shorten_by, angle):
+    if branch_length > 3:
+        forward(branch_length)
+        new_length = branch_length - shorten_by
+        left(angle)
+        build_tree(new_length, shorten_by, angle)
+        right(angle * 2)
+        build_tree(new_length, shorten_by, angle)
+        left(angle)
+        backward(branch_length) 
+
+initializeTurtle(initial_window_size=(800, 800))
+jump(400, 600)
+face(0)
+color('green') 
+build_tree(80, 8, 25)
+show()
+	</code></pre>
+The code above plays a similar role as the first segment of code we have just documented. But it generates 
+a different fractal tree. The base case requires the turtle to stop if the branch is too short. In that case,
+the branch is too short if its length is less than or equal to 3 units. In the case that the branch has a 
+length greater than 3 units, the turtle moves forward by the branch length and the formula
+		new_length = branch_length - shorten_by
+is used to calculate the length of each new branch. To recursively create the subtrees, the turtle will 
+turn to a certain angle to the left and create the left subtree by applying the function 
+"build_tree(new_length, shorten_by, angle)". It then makes a right turn by doubling the angle specified after
+the "new_length" formula and then create the right subtree by applying the previous "buil_tree()" function. The
+turtle the returns to its starting position by turning back to the original function angle using the function
+backward(branch_length). 
+For this code, the green colored turtle is set to the starting position at coordinate (400, 600) with its face 
+facing zero degree to the right. The initial branch length, shorten amount, and angle are respectively 80 unit, 
+8 units, and 25 degrees. The "show()" was used to visualize the results as can be seen below.
+
+<figure>
+          <img
+            src=" https://amilce2023.github.io/labreports/turtlegraphic1.png"
+            width="1000"
+            height="800"
+            loading="lazy"
+          />
+          <figcaption>
+            <strong></strong> A square drawn by moving the turtle in the canvas.
+          </figcaption>
+        </figure>
+	      
+      <!-- --------------------------------------------------------------------------------------------------- -->
+        </p>
+		
       </section>
 
       <!-- RESULTS & ANALYSIS SECTION -->
