@@ -169,7 +169,30 @@ facing zero degree to the right. The initial branch length, shorten amount, and 
 	      
       <!-- --------------------------------------------------------------------------------------------------- -->
         </p>
+</code></pre>
+In this section, we modify and extend the code to create a more appealing tree. the code is given below. In the
+provided code segment, we only provide the portion that aims at modifying extending the original code.
+	</p>
 		
+ <section id="code">
+	<pre><code class="language-python"> 
+def get_color(depth):
+    r = int(255 * (depth / 7))
+    g = int(255 * (1 - depth / 7))
+    b = 0
+    return f'#{r:02x}{g:02x}{b:02x}'
+
+current_color = get_color(depth)
+        color(current_color)  
+        width(depth)
+
+def reset_and_draw():
+    clear_output(wait=True)
+    draw_first_tree()
+    draw_second_tree()
+
+reset_and_draw()
+
       </section>
 
       <!-- RESULTS & ANALYSIS SECTION -->
