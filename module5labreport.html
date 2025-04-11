@@ -1,1 +1,318 @@
 
+
+<!-- INTRODUCTION SECTION -->
+<!-- --------------------------------------------------------------------------------------------------- -->
+<!-- --------------------------------------------------------------------------------------------------- -->
+<!-- --------------------------------------------------------------------------------------------------- -->
+<!-- --------------------------------------------------------------------------------------------------- -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Template for Fractal Geometry Computational Lab Reports" />
+  <link rel="stylesheet" href="https://latex.vercel.app/style.css" />
+  <link 
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism.min.css"
+  />
+  <script defer id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$','$$'], ['\\[','\\]']],
+      }
+    }
+  </script>
+  <title>Fractal Geometry Lab Report</title> 
+</head>
+<body id="top">
+
+
+
+
+  <header>
+    <h1>Fractal Geometry 
+	    Module 4 Lab Report</h1>
+    <p class="author">
+      Annkid Joseph Milcé <br />
+      04/07/2025
+    </p>
+  </header>
+  
+
+
+  <main>
+    <article class="indent-pars">
+      
+      <!-- INTRODUCTION SECTION -->
+      <!-- --------------------------------------------------------------------------------------------------- -->
+      <!-- --------------------------------------------------------------------------------------------------- -->
+      <!-- --------------------------------------------------------------------------------------------------- -->
+      <!-- --------------------------------------------------------------------------------------------------- -->
+      <section id="introduction">
+        <h2>Introduction</h2>
+        <p>
+          This is a report for module 4 one of the course Fractal Geometry. 
+          In this module we experiment with a Colab code that will help us to draw a fractsl three by recursion.
+          In this experiment, the type of fractal genersted by the code is called a fracvtal canopy. To obtain it,
+          each canopy comes from spliting  a line segment into two smaller segments at the end, then split the two 
+          smaller segments, and keep doing so infinitely. We explore the the code in the sections below. 
+        </p>
+     
+	<!-- ------------------------------------------------------------------------------------------------- -->
+	<!-- ------------------------------------------------------------------------------------------------- -->
+	<!-- ------------------------------------------------------------------------------------------------- -->
+	<!-- ------------------------------------------------------------------------------------------------- -->
+	<section id="code">
+	<pre><code class="language-python">                
+!wget -O turtle_setup.py 'https://raw.githubusercontent.com/williamedwardhahn/fractal25/refs/heads/main/turtle_setup.py'
+from turtle_setup import *
+
+def fractal_tree(length, depth):
+    if depth == 0:
+        return
+    else:
+        forward(length)
+        left(30)
+        fractal_tree(length * 0.7, depth - 1)
+        right(60)
+        fractal_tree(length * 0.7, depth - 1)
+        left(30)
+        backward(length)
+		
+initializeTurtle(initial_window_size=(500, 500))   
+jump(250, 450) 
+face(0)
+color('green')
+length = 100 
+depth = 7  
+fractal_tree(length, depth)
+show()
+	</code></pre>
+The code above is a function whose objective is to draw the fractal tree recursively after importing the necessary
+library. The base case for the recursion formula is zero which means that the depth is zero, the recursion stops.
+Otherwise, the turtle will move forward by a certain length. To create the branches, the turtle turns 30 degrees
+left and 60 degrees to draw a subtree before making another turn 30 degrees left to return to its original position.
+As for the turtle environment, the turtle is positioned canvas size is positioned at coordinate (250, 450) in a
+500 X 500 window. It is colored in green with its face set 0 degree to the right. The length of the main trunk is
+is set to 100 and the depth of the recursion which set the number of branching level is 7. The "show()" function is 
+used for visualization as shown below.
+</p>
+
+<figure>
+          <img
+            src=" https://amilce2023.github.io/labreports/module4image1.png"
+            width="1000"
+            height="800"
+            loading="lazy"
+          />
+          <figcaption>
+            <strong></strong> A simple fractal tree using recursion.
+          </figcaption>
+        </figure>
+	      
+      <!-- --------------------------------------------------------------------------------------------------- -->
+        </p>
+		
+<!-- ------------------------------------------------------------------------------------------------- -->
+<!-- ------------------------------------------------------------------------------------------------- -->
+<!-- ------------------------------------------------------------------------------------------------- -->
+<!-- ------------------------------------------------------------------------------------------------- -->
+	    
+        <section id="code">
+	<pre><code class="language-python">  
+def build_tree(branch_length, shorten_by, angle):
+    if branch_length > 3:
+        forward(branch_length)
+        new_length = branch_length - shorten_by
+        left(angle)
+        build_tree(new_length, shorten_by, angle)
+        right(angle * 2)
+        build_tree(new_length, shorten_by, angle)
+        left(angle)
+        backward(branch_length) 
+
+initializeTurtle(initial_window_size=(800, 800))
+jump(400, 600)
+face(0)
+color('green') 
+build_tree(80, 8, 25)
+show()
+	</code></pre>
+The code above plays a similar role as the first segment of code we have just documented. But it generates 
+a different fractal tree that looks fuller with more branches. The base case requires the turtle to stop 
+if the branch is too short. In that case,the branch is too short if its length is less than or equal 
+to 3 units. In the case that the branch has a length greater than 3 units, the turtle moves forward by
+the branch length, and the formula "new_length = branch_length - shorten_by" is used to calculate 
+the length of each new branch. To recursively create the subtrees, the turtle will turn to a certain angle 
+to the left and create the left subtree by applying the function "build_tree(new_length, shorten_by, angle)". 
+It then makes a right turn by doubling the angle specified after the "new_length" formula and then create the 
+right subtree by applying the previous "buil_tree()" function. The turtle the returns to its starting position 
+by turning back to the original function angle using the function backward(branch_length). 
+For this code, the green colored turtle is set to the starting position at coordinate (400, 600) with its face 
+facing zero degree to the right. The initial branch length, shorten amount, and angle are respectively 80 unit, 
+8 units, and 25 degrees. The "show()" was used to visualize the results as can be seen below.
+
+<figure>
+          <img
+            src=" https://amilce2023.github.io/labreports/module4image2.png"
+            width="1000"
+            height="800"
+            loading="lazy"
+          />
+          <figcaption>
+            <strong></strong> A fuller fractal tree botain by recursion with modification from the previous code.
+          </figcaption>
+        </figure>
+	      
+      <!-- --------------------------------------------------------------------------------------------------- -->
+        </p>
+</code></pre>
+In this section, we modify and extend the code to create a more appealing tree. the code is given below. In the
+provided code segment, we only provide the portion that aims at modifying extending the original code.
+	</p>
+		
+ <section id="code">
+	<pre><code class="language-python"> 
+def get_color(depth):
+    r = int(255 * (depth / 7))
+    g = int(255 * (1 - depth / 7))
+    b = 0
+    return f'#{r:02x}{g:02x}{b:02x}'
+
+current_color = get_color(depth)
+        color(current_color)  
+        width(depth)
+
+def reset_and_draw():
+    clear_output(wait=True)
+    draw_first_tree()
+    draw_second_tree()
+
+reset_and_draw()
+
+
+</code></pre>
+      </section>
+
+      <!-- RESULTS & ANALYSIS SECTION -->
+      <!-- --------------------------------------------------------------------------------------------------- -->
+      <!-- --------------------------------------------------------------------------------------------------- -->
+      <!-- --------------------------------------------------------------------------------------------------- -->
+      <!-- --------------------------------------------------------------------------------------------------- -->
+      <section id="results">
+      
+      
+        <h2>Results &amp; Analysis</h2>
+        <p>
+          This experiment is conducted by generating a Google Colab code that creates a square by
+	  moving a turtle on a canvas. The first part of the code consisted in importing the Turtle
+	  Library. This library allows the creation of the square by moving the turtle to create lines.
+	  The function initializeTurtle() sets up the turtle environment while the showturtle() makes 
+	  the turtle visible to the user. The functions color() and bgcolor() were used to change the 
+	  pen color and set the background color, respectively. Having initializing the turtle, the
+	  functions jump() and face() were used to move the turtle to a suitable position as desired.
+	  It is important to note that since we want to create a square, a "for" loop was used to 
+	  to create the sides of the square. In this loop, the for_in range(4) allows to draw the 4 
+          the four sides of the square. In this experiment each side was set to be 100 units long 
+	  using the forward() function followed by the right() fucntion to turn the turtle a certain 
+          degrees to the right, and thus forming the corners of the square. Finally, the show()
+	  function displays the final drawing after the square was drawn. 
+
+
+      </section>
+      <!-- --------------------------------------------------------------------------------------------------- -->
+      <!-- --------------------------------------------------------------------------------------------------- -->
+      <!-- --------------------------------------------------------------------------------------------------- -->
+      <!-- --------------------------------------------------------------------------------------------------- -->
+        </p>
+        In the modified portion of the code, the same functions and commands were used. However, the
+        turtle starting position was set at the coordinates (500, 500) using the the command jump 
+	(500, 500). We also increased the sides length of the square by 200 units more and turned the
+	turtle 270 degrees to the right. We also changed the background color from white to sky blue,
+	and make the pen clor white. 
+	      
+	      
+
+	
+      <!-- --------------------------------------------------------------------------------------------------- -->
+      <!-- --------------------------------------------------------------------------------------------------- -->
+      <!-- --------------------------------------------------------------------------------------------------- -->
+      <!-- --------------------------------------------------------------------------------------------------- -->
+        </p>
+	The results from the modified and extended code can be seen in the diagrams below.
+
+
+
+        <figure>
+          <img
+            src=" https://amilce2023.github.io/labreports/module4image3.png"
+            width="1000"
+            height="800"
+            loading="lazy"
+          />
+          <figcaption>
+            <strong></strong> A square drawn by moving the turtle in the canvas.
+          </figcaption>
+        </figure>
+	      
+      <!-- --------------------------------------------------------------------------------------------------- -->
+        </p>   
+      
+      </section>
+
+
+
+      <!-- CONCLUSION SECTION -->
+      <!-- --------------------------------------------------------------------------------------------------- -->
+      <!-- --------------------------------------------------------------------------------------------------- -->
+      <!-- --------------------------------------------------------------------------------------------------- -->
+      <!-- --------------------------------------------------------------------------------------------------- -->
+      <section id="conclusion">
+        <h2>Conclusion</h2>
+        <p>
+	In conclusion, this report highlights the steps that we used to generate a code that introduce us to 
+	Logo to the Logo programming langiage via the use of Turtle Graphics. We experimented with three codes
+	segments. The first part of the code was provide and we used to visualize a square drwan by a turtle
+	moving on a canvas. In the second section of the experiment, we modified the given code to create a
+	bigger square at a different location with a different colors for the background and the square.
+	At the end, we experimented with a different code segment that allows us to create moving polygons
+	from a triangle to an icosagon. This was a fascinating experiment in wehich we learn how to command 
+	the computer to do what we want it to do; a cool way to learn from experiments and observations.
+		
+         </p>
+      </section>
+
+     
+     
+
+      <!-- REFERENCE SECTION -->
+      <!-- --------------------------------------------------------------------------------------------------- -->
+      <!-- --------------------------------------------------------------------------------------------------- -->
+      <!-- --------------------------------------------------------------------------------------------------- -->
+      <!-- --------------------------------------------------------------------------------------------------- -->
+      <section id="conclusion">
+        <h2>References</h2>
+        <p>     
+        https://en.wikipedia.org/wiki/Logo_(programming_language)
+
+	</p>
+      
+      </section>
+		
+	https://www.youtube.com/watch?v=NGmNvRXMhac
+   
+         </p>
+	    
+     
+     
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-python.min.js"></script>
+</body>
+</html>
+
+
