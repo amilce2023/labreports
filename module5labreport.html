@@ -37,7 +37,7 @@
 	    Module 5 Lab Report</h1>
     <p class="author">
       Annkid Joseph Milcé <br />
-      04/07/2025
+      04/13/2025
     </p>
   </header>
   
@@ -54,11 +54,13 @@
       <section id="introduction">
         <h2>Introduction</h2>
         <p>
-          This is a report for module 4 one of the course Fractal Geometry. 
-          In this module we experiment with a Colab code that will help us to draw a fractal tree by recursion.
-          In this experiment, the type of fractal genersted by the code is called a fracvtal canopy. To obtain it,
-          each canopy comes from spliting  a line segment into two smaller segments at the end, then split the two 
-          smaller segments, and keep doing so infinitely. We explore the the code in the sections below. 
+In this report, we are going to document, extend, and analyze a python code that that represents an infinite dust.
+In mathematics, the term infinite dust refers to a set of real nummbers with some remarkable properties. This set
+is aslo known as the cantor set as many believe that it was discovered by Geor Cantor in 1883 although some sources 
+mention that they were discovered by Henry John Setephen Smith in 1874. It is somehow, one of the first examples of
+fractal. One way to get a cantor set is to start with a line segment, with the middle third of it, and repeat the 
+process with the remaining shorter segments. The set resulting from this process is known as the Cantor ternary set.
+Below, we will document and explain the a code that generates a Cantor set.
         </p>
      
 	<!-- ------------------------------------------------------------------------------------------------- -->
@@ -67,38 +69,22 @@
 	<!-- ------------------------------------------------------------------------------------------------- -->
 	<section id="code">
 	<pre><code class="language-python">                
-!wget -O turtle_setup.py 'https://raw.githubusercontent.com/williamedwardhahn/fractal25/refs/heads/main/turtle_setup.py'
-from turtle_setup import *
-
-def fractal_tree(length, depth):
-    if depth == 0:
-        return
-    else:
-        forward(length)
-        left(30)
-        fractal_tree(length * 0.7, depth - 1)
-        right(60)
-        fractal_tree(length * 0.7, depth - 1)
-        left(30)
-        backward(length)
-		
-initializeTurtle(initial_window_size=(500, 500))   
-jump(250, 450) 
-face(0)
-color('green')
-length = 100 
-depth = 7  
-fractal_tree(length, depth)
-show()
+import numpy as np
+import matplotlib.pyplot as plt
+x_start = 0        
+x_end = 3         
+y_position = 0     
+bar_height = 5     
+spacing = 10     
+depth = 6         
 	</code></pre>
-The code above is a function whose objective is to draw the fractal tree recursively after importing the necessary
-library. The base case for the recursion formula is zero which means that the depth is zero, the recursion stops.
-Otherwise, the turtle will move forward by a certain length. To create the branches, the turtle turns 30 degrees
-left and 60 degrees to draw a subtree before making another turn 30 degrees left to return to its original position.
-As for the turtle environment, the turtle is positioned canvas size is positioned at coordinate (250, 450) in a
-500 X 500 window. It is colored in green with its face set 0 degree to the right. The length of the main trunk is
-is set to 100 and the depth of the recursion which set the number of branching level is 7. The "show()" function is 
-used for visualization as shown below.
+The code above serves to important the necessary libraries and to set the initial parameters for the experiment.
+Numpy was imported as np to provide support for numerical operations including handling arrays, and matplotlib.pyplot
+to create static, animated, and interactive visualizations. When it comes to setting the initial parameters, the 
+starting x_coordinate and the ending x_coordinate for the first bar are creares suing "x_start" and "x_end" while 
+the "y-position" starts the starting y-coordinate which represents the start of the first bar. "bar_height" represents
+the height of each segment of the infinite dust set, the "spacing" sets the vertical distance between successive levels 
+of bars, and the "depth" parameters determines the number or recursive levels to generate the set.
 </p>
 
 <figure>
@@ -123,23 +109,18 @@ used for visualization as shown below.
 	    
         <section id="code">
 	<pre><code class="language-python">  
-def build_tree(branch_length, shorten_by, angle):
-    if branch_length > 3:
-        forward(branch_length)
-        new_length = branch_length - shorten_by
-        left(angle)
-        build_tree(new_length, shorten_by, angle)
-        right(angle * 2)
-        build_tree(new_length, shorten_by, angle)
-        left(angle)
-        backward(branch_length) 
+def cantor_set(x_start, x_end, y_position, depth):
+    if depth == 0:
+        return []
+   
+    left_segment = [[x_start, x_start + (x_end - x_start) / 3, y_position]]
+    right_segment = [[x_end - (x_end - x_start) / 3, x_end, y_position]]
+ 
+    left_recursive = cantor_set(x_start, x_start + (x_end - x_start) / 3, y_position - spacing, depth - 1)
+    right_recursive = cantor_set(x_end - (x_end - x_start) / 3, x_end, y_position - spacing, depth - 1)
+ 
+    return left_segment + right_segment + left_recursive + right_recursive
 
-initializeTurtle(initial_window_size=(800, 800))
-jump(400, 600)
-face(0)
-color('green') 
-build_tree(80, 8, 25)
-show()
 	</code></pre>
 The code above plays a similar role as the first segment of code we have just documented. But it generates 
 a different fractal tree that looks fuller with more branches. The base case requires the turtle to stop 
