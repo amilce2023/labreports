@@ -34,7 +34,7 @@
 
   <header>
     <h1>Fractal Geometry 
-	    Module 4 Lab Report</h1>
+	    Module 5 Lab Report</h1>
     <p class="author">
       Annkid Joseph Milcé <br />
       04/07/2025
@@ -55,7 +55,7 @@
         <h2>Introduction</h2>
         <p>
           This is a report for module 4 one of the course Fractal Geometry. 
-          In this module we experiment with a Colab code that will help us to draw a fractsl three by recursion.
+          In this module we experiment with a Colab code that will help us to draw a fractal tree by recursion.
           In this experiment, the type of fractal genersted by the code is called a fracvtal canopy. To obtain it,
           each canopy comes from spliting  a line segment into two smaller segments at the end, then split the two 
           smaller segments, and keep doing so infinitely. We explore the the code in the sections below. 
@@ -207,19 +207,19 @@ reset_and_draw()
       
         <h2>Results &amp; Analysis</h2>
         <p>
-          This experiment is conducted by generating a Google Colab code that creates a square by
-	  moving a turtle on a canvas. The first part of the code consisted in importing the Turtle
-	  Library. This library allows the creation of the square by moving the turtle to create lines.
-	  The function initializeTurtle() sets up the turtle environment while the showturtle() makes 
-	  the turtle visible to the user. The functions color() and bgcolor() were used to change the 
-	  pen color and set the background color, respectively. Having initializing the turtle, the
-	  functions jump() and face() were used to move the turtle to a suitable position as desired.
-	  It is important to note that since we want to create a square, a "for" loop was used to 
-	  to create the sides of the square. In this loop, the for_in range(4) allows to draw the 4 
-          the four sides of the square. In this experiment each side was set to be 100 units long 
-	  using the forward() function followed by the right() fucntion to turn the turtle a certain 
-          degrees to the right, and thus forming the corners of the square. Finally, the show()
-	  function displays the final drawing after the square was drawn. 
+          This experiment is conducted by generating a Google Colab code that creates a fractal tree by
+	  moving a turtle on a canvas. The code was modified and extended to create a more appealing tree and the 
+	  functionality of the code. The way the code was modified creates a fractal tree that is different to the 
+	  one genersted by the original code in the sense that it offers more variation in the visualization of the
+          the results. With the introduction of a function that colors the tree based on the depth of the recursion, 
+	  enhances the output as the tree is changing from one color to another. In this code, it transitions from 
+	  green to yellow then to red and thus enhancing the tree's appearance as if it is growing different season 
+	  of the year. Another way the modified and extended code enhances the visual look of the tree is in the sense 
+	  that the branches are more complex. The functions "fractal_tree" and "build_tree" create very complex structures
+	  that portray a natural tree and the user can adjust the parameters to to create different tree shapes. A great
+	  change in the code is the use of the "reset_and_draw function". That feature makes sure that each previous tree
+	  is cleared before generating a new tree. That avoids cluttering the canvas as new trees are created. These are
+	  many changes that were done in the original code. The results can be seen in the diagram below.
 
 
       </section>
@@ -228,23 +228,6 @@ reset_and_draw()
       <!-- --------------------------------------------------------------------------------------------------- -->
       <!-- --------------------------------------------------------------------------------------------------- -->
         </p>
-        In the modified portion of the code, the same functions and commands were used. However, the
-        turtle starting position was set at the coordinates (500, 500) using the the command jump 
-	(500, 500). We also increased the sides length of the square by 200 units more and turned the
-	turtle 270 degrees to the right. We also changed the background color from white to sky blue,
-	and make the pen clor white. 
-	      
-	      
-
-	
-      <!-- --------------------------------------------------------------------------------------------------- -->
-      <!-- --------------------------------------------------------------------------------------------------- -->
-      <!-- --------------------------------------------------------------------------------------------------- -->
-      <!-- --------------------------------------------------------------------------------------------------- -->
-        </p>
-	The results from the modified and extended code can be seen in the diagrams below.
-
-
 
         <figure>
           <img
@@ -273,14 +256,12 @@ reset_and_draw()
       <section id="conclusion">
         <h2>Conclusion</h2>
         <p>
-	In conclusion, this report highlights the steps that we used to generate a code that introduce us to 
-	Logo to the Logo programming langiage via the use of Turtle Graphics. We experimented with three codes
-	segments. The first part of the code was provide and we used to visualize a square drwan by a turtle
-	moving on a canvas. In the second section of the experiment, we modified the given code to create a
-	bigger square at a different location with a different colors for the background and the square.
-	At the end, we experimented with a different code segment that allows us to create moving polygons
-	from a triangle to an icosagon. This was a fascinating experiment in wehich we learn how to command 
-	the computer to do what we want it to do; a cool way to learn from experiments and observations.
+	In conclusion, this report highlights the steps that we used to generate a code that aims at creating a fractal
+	tree, also known as a canopy, by recursion. The first portion of the original code gives birth to a not so complex
+	tree. The code code was then changed to create a true that looks fuller with many other brsnches added. At the
+	end of the experiment, we modified and extend to create a more complex tree that mimic a real life one by adding
+	some other functions like the "get_color" function. The changes in the original code enhances the visualization
+	of the prevously created trees as can be observed in Figure 3. 
 		
          </p>
       </section>
@@ -296,17 +277,10 @@ reset_and_draw()
       <section id="conclusion">
         <h2>References</h2>
         <p>     
-        https://en.wikipedia.org/wiki/Logo_(programming_language)
+       https://en.wikipedia.org/wiki/Fractal_canopy
 
 	</p>
-      
-      </section>
-		
-	https://www.youtube.com/watch?v=NGmNvRXMhac
-   
-         </p>
 	    
-     
      
   </main>
 
@@ -314,4 +288,5 @@ reset_and_draw()
   <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-python.min.js"></script>
 </body>
 </html>
+
 
