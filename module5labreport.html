@@ -122,19 +122,14 @@ right_recursive = cantor_set(x_end - (x_end - x_start) / 3, x_end, y_position - 
 return left_segment + right_segment + left_recursive + right_recursive
 
 	</code></pre>
-The code above plays a similar role as the first segment of code we have just documented. But it generates 
-a different fractal tree that looks fuller with more branches. The base case requires the turtle to stop 
-if the branch is too short. In that case,the branch is too short if its length is less than or equal 
-to 3 units. In the case that the branch has a length greater than 3 units, the turtle moves forward by
-the branch length, and the formula "new_length = branch_length - shorten_by" is used to calculate 
-the length of each new branch. To recursively create the subtrees, the turtle will turn to a certain angle 
-to the left and create the left subtree by applying the function "build_tree(new_length, shorten_by, angle)". 
-It then makes a right turn by doubling the angle specified after the "new_length" formula and then create the 
-right subtree by applying the previous "buil_tree()" function. The turtle the returns to its starting position 
-by turning back to the original function angle using the function backward(branch_length). 
-For this code, the green colored turtle is set to the starting position at coordinate (400, 600) with its face 
-facing zero degree to the right. The initial branch length, shorten amount, and angle are respectively 80 unit, 
-8 units, and 25 degrees. The "show()" was used to visualize the results as can be seen below.
+The code above first defines the fucntion that will genersate the Cantor set pattern. The function takes the four
+parameters described in the previous code segment. The function will return an empty list if the depth is zero which
+means that no more segment is to be generated. Otherwise, the segment are defined such that "left_segment" returns 
+the left third of the current segment while the "right_segment" will return the right third of the segment; both of
+which will be represented as lists contiaining the x-coordinates and the actual y-coordinate. With the "left_recursive"
+and the "right_recursive" commands, the function is recursively called twice in order to generate the the left and right 
+segments for the next depth level moving downwards by spacing. Finally, the the "return" command returns a combination 
+of the current segments including the ones created from recursive calls. 
 
 <figure>
           <img
