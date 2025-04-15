@@ -86,21 +86,6 @@ the "y-position" starts the starting y-coordinate which represents the start of 
 the height of each segment of the infinite dust set, the "spacing" sets the vertical distance between successive levels 
 of bars, and the "depth" parameters determines the number or recursive levels to generate the set.
 </p>
-
-<figure>
-          <img
-            src=" https://amilce2023.github.io/labreports/module4image1.png"
-            width="1000"
-            height="800"
-            loading="lazy"
-          />
-          <figcaption>
-            <strong></strong> A simple fractal tree using recursion.
-          </figcaption>
-        </figure>
-	      
-      <!-- --------------------------------------------------------------------------------------------------- -->
-        </p>
 		
 <!-- ------------------------------------------------------------------------------------------------- -->
 <!-- ------------------------------------------------------------------------------------------------- -->
@@ -131,9 +116,28 @@ and the "right_recursive" commands, the function is recursively called twice in 
 segments for the next depth level moving downwards by spacing. Finally, the the "return" command returns a combination 
 of the current segments including the ones created from recursive calls. 
 
+<!-- ------------------------------------------------------------------------------------------------- -->
+	    
+        <section id="code">
+	<pre><code class="language-python"> 
+# Generate Cantor Set segments data
+segments = np.array(cantor_set(x_start, x_end, y_position, depth))  # Convert to an array for easy plotting
+
+# Plot the Cantor Set
+plt.figure(figsize=(25, 25))
+
+# Draw each segment as a black bar
+for x_start, x_end, y in segments:
+    plt.fill_between([x_start, x_end], [y] * 2, [y - bar_height] * 2, color="black")
+
+# Hide the axes for a clean look
+plt.axis('off')
+plt.show()
+</p>
+		
 <figure>
           <img
-            src=" https://amilce2023.github.io/labreports/module4image2.png"
+            src=" https://amilce2023.github.io/labreports/module5image1.png"
             width="1000"
             height="800"
             loading="lazy"
