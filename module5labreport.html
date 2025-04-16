@@ -160,7 +160,12 @@ In this section, we provide a modified and extended code whose goal is to create
 Here, we put our focus on the changes and extensions that were made and document the functionality of each new code element. 
 In the code, we import three more libraries. First, we imported "matplotlib" to gain acces to colormaps in order to color 
 the segments. Second, we import "FuncAnimation" and "PillowWriter so we can create and save the animation, and we finally 
-import Image so we can display the results. 
+import Image so we can display the results. Another change that was done in the code is that Colormap to customize the color 
+and hence, enhance the visualization. We use the "Viridis" color palette on purpose as it was designed to be colorblind 
+friendly by maintaining readability and clarity even when viewed in grayscale or by people that percceived as colorblind. We
+use the the "FuncAnimation" to animate the results of the previous code which will allow the segments to be seen progressively
+by depth as time elapses. As a whole, the modified and extended code enhances the visualization with the animation addon, the 
+depth specific coloring, and with the dynamic updates to show how the Cantor set progresses over time. The code is displayed below.
 	</p>
 		
  <section id="code">
@@ -218,19 +223,20 @@ display(Image(filename=gif_path))
       
         <h2>Results &amp; Analysis</h2>
         <p>
-          This experiment is conducted by generating a Google Colab code that creates a fractal tree by
-	  moving a turtle on a canvas. The code was modified and extended to create a more appealing tree and the 
-	  functionality of the code. The way the code was modified creates a fractal tree that is different to the 
-	  one genersted by the original code in the sense that it offers more variation in the visualization of the
-          the results. With the introduction of a function that colors the tree based on the depth of the recursion, 
-	  enhances the output as the tree is changing from one color to another. In this code, it transitions from 
-	  green to yellow then to red and thus enhancing the tree's appearance as if it is growing different season 
-	  of the year. Another way the modified and extended code enhances the visual look of the tree is in the sense 
-	  that the branches are more complex. The functions "fractal_tree" and "build_tree" create very complex structures
-	  that portray a natural tree and the user can adjust the parameters to to create different tree shapes. A great
-	  change in the code is the use of the "reset_and_draw function". That feature makes sure that each previous tree
-	  is cleared before generating a new tree. That avoids cluttering the canvas as new trees are created. These are
-	  many changes that were done in the original code. The results can be seen in the diagram below.
+  As mentioned in the introduction,, the goal of this code was to to generate a Cantor set by removing the middle third 
+  of a line segment and repeat the process fir each remainng segment. The original code resulted in a static representation
+  of the Cantor set. We modified it to enhance the visualization and the overall perormance of the original code. Here, we 
+  performance an analysis on how the second improves the first code after some key modifications was done in it.The code 
+  implemented a predefined "max_depth" that controls the visual and computational complexity of the resulted image.
+  As can be in seen in Figure 2, the segments are drawn as horizontal bars that are layed vertically using a constant
+  spacing. The color gradient improves the visualization where each recursive level uses a distinct color shade. Removing
+  axis from the plot allow for a clean layout which centers the focus entirely on the fractal. It worth noticing that each 
+  frame recompute the full set of segment up to its current depth; this improve the perfomance of the code and makes it
+  more efficient. The results form this code is significant in the sense that it allows us to visualize how the Cantor set
+  demonsgtrates basic fracctal properties in the sense that each segment contains smaller copies of the whole and due to the
+  fact that it visually occupies space while having a zero length in the limit. The analysis of the results onbtained from
+  modifying the original code to an animated GIF can been observed in the picture displayed below.
+ 
 
 
       </section>
@@ -248,7 +254,7 @@ display(Image(filename=gif_path))
             loading="lazy"
           />
           <figcaption>
-            <strong></strong> A square drawn by moving the turtle in the canvas.
+            <strong></strong> A Cantor set displayed as a colorblind friendly animated GIF.
           </figcaption>
         </figure>
 	      
@@ -267,12 +273,11 @@ display(Image(filename=gif_path))
       <section id="conclusion">
         <h2>Conclusion</h2>
         <p>
-	In conclusion, this report highlights the steps that we used to generate a code that aims at creating a fractal
-	tree, also known as a canopy, by recursion. The first portion of the original code gives birth to a not so complex
-	tree. The code code was then changed to create a true that looks fuller with many other brsnches added. At the
-	end of the experiment, we modified and extend to create a more complex tree that mimic a real life one by adding
-	some other functions like the "get_color" function. The changes in the original code enhances the visualization
-	of the prevously created trees as can be observed in Figure 3. 
+  In conclusion, the purpose of this code is to generate an infinite dust also known as a Cantor set. A Cantor set 
+  is an example of fractal and a set with an uncountably infinite num,ber of points with no lentgh. The set was generated 
+  by removing the middle third of each line segment by recurssion. The code generates an animated visualisation of the 
+  Cantor set and highlights the recursive nature of the fractal. The results were saved as a GIF and displayed as colored 
+  segments based on the depth of each segment for a visually appealing effect.
 		
          </p>
       </section>
