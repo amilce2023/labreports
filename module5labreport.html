@@ -156,28 +156,49 @@ The two ultimate code lines hide the axis for a better visual appearance and plo
       <!-- --------------------------------------------------------------------------------------------------- -->
         </p>   	
 </code></pre>
-In this section, we modify and extend the code to create a more appealing tree. the code is given below. In the
-provided code segment, we only provide the portion that aims at modifying extending the original code.
+In this section, we provide a modified and extended code whose goal is to creates a more appealing animated Cantor set.
 	</p>
 		
  <section id="code">
 	<pre><code class="language-python"> 
-def get_color(depth):
-    r = int(255 * (depth / 7))
-    g = int(255 * (1 - depth / 7))
-    b = 0
-    return f'#{r:02x}{g:02x}{b:02x}'
+import numpy as np
+import matplotlib.pyplot as plt
+import matplotlib.cm as cm
+from matplotlib.animation import FuncAnimation, PillowWriter
+from IPython.display import Image, display
 
-current_color = get_color(depth)
-        color(current_color)  
-        width(depth)
+x_start = 0
+x_end = 3
+bar_height = 5
+spacing = 10
+max_depth = 6
 
-def reset_and_draw():
-    clear_output(wait=True)
-    draw_first_tree()
-    draw_second_tree()
+def cantor_set(x_start, x_end, y_position, depth, max_depth):
+    if depth == 0:
+        return []
 
-reset_and_draw()
+    third = (x_end - x_start) / 3
+    color = cm.viridis(depth / max_depth)  # Change to 'viridis' for a colorful gradient
+    left = [[x_start, x_start + third, y_position, color]]
+    right = [[x_end - third, x_end, y_position, color]]
+    left_rec = cantor_set(x_start, x_start + third, y_position - spacing, depth - 1, max_depth)
+    right_rec = cantor_set(x_end - third, x_end, y_position - spacing, depth - 1, max_depth)
+    return left + right + left_rec + right_rec
+fig, ax = plt.subplots(figsize=(10, 6))
+ax.set_axis_off()
+
+def update(frame):
+    ax.clear()
+    ax.set_axis_off()
+    ax.set_title(f"Cantor Set - Depth {frame}", fontsize=14)
+    segments = cantor_set(x_start, x_end, 0, frame, max_depth)
+    for x0, x1, y, color in segments:
+        ax.fill_between([x0, x1], [y]*2, [y - bar_height]*2, color=color)
+
+anim = FuncAnimation(fig, update, frames=range(1, max_depth + 1), interval=1000, repeat=False)
+gif_path = "/content/cantor_set.gif"
+anim.save(gif_path, writer=PillowWriter(fps=1))
+display(Image(filename=gif_path))
 
 
 </code></pre>
