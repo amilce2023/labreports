@@ -55,7 +55,9 @@
         <h2>Introduction</h2>
         <p>
 This is a report for module 6 of the course Fractal Geometry. In this module we experiment with a Colab whose purpose
-is to generate a set of 
+is to generate a set of points that we would visualize as a 2D grid. We also see how we can creste complex patterns
+by applying an iterative mathematical trsansformation to the points. We below, we provide and document the code that 
+is used to attain that objetive.
         </p>
      
 	<!-- ------------------------------------------------------------------------------------------------- -->
@@ -64,43 +66,43 @@ is to generate a set of
 	<!-- ------------------------------------------------------------------------------------------------- -->
 	<section id="code">
 	<pre><code class="language-python">                
-!wget -O turtle_setup.py 'https://raw.githubusercontent.com/williamedwardhahn/fractal25/refs/heads/main/turtle_setup.py'
-from turtle_setup import *
+import numpy as np
+import matplotlib.pyplot as plt
 
-def fractal_tree(length, depth):
-    if depth == 0:
-        return
-    else:
-        forward(length)
-        left(30)
-        fractal_tree(length * 0.7, depth - 1)
-        right(60)
-        fractal_tree(length * 0.7, depth - 1)
-        left(30)
-        backward(length)
+def generate_grid(size):
+    x = np.linspace(-1, 1, size) 
+    y = np.linspace(-1, 1, size)
+    grid = np.meshgrid(x, y)   
+    return grid
+
+def plot_grid(grid):
+    x_grid, y_grid = grid
+    plt.figure(figsize=(10, 10))
+    plt.scatter(x_grid, y_grid, s=1, color='blue') 
+    plt.title(f'2D Grid of {len(x_grid)}x{len(y_grid)} points')
+    plt.show()
+
+size = 50   
 		
-initializeTurtle(initial_window_size=(500, 500))   
-jump(250, 450) 
-face(0)
-color('green')
-length = 100 
-depth = 7  
-fractal_tree(length, depth)
-show()
+grid = generate_grid(size)
+plot_grid(grid)
 	</code></pre>
-The code above is a function whose objective is to draw the fractal tree recursively after importing the necessary
-library. The base case for the recursion formula is zero which means that the depth is zero, the recursion stops.
-Otherwise, the turtle will move forward by a certain length. To create the branches, the turtle turns 30 degrees
-left and 60 degrees to draw a subtree before making another turn 30 degrees left to return to its original position.
-As for the turtle environment, the turtle is positioned canvas size is positioned at coordinate (250, 450) in a
-500 X 500 window. It is colored in green with its face set 0 degree to the right. The length of the main trunk is
-is set to 100 and the depth of the recursion which set the number of branching level is 7. The "show()" function is 
-used for visualization as shown below.
+In the code above, we first import the necessary libraries. We import n"numpy" as "np" as the library that will
+be used to manipulate the 2D array and to handle numerical operations. We also import "matplotlib.pyplot" to plot
+and visualize the resulting image. Next, we define the function "generate_grid" which will create the points whose 
+size is the number of points along the x and y axes. The command "np.linspace" ensures that the points are evenly sized
+while the command "np.meshgrid" generate the rectangular grid out of oof the x and y coordinates. The "return" command
+returns a tuple of 2D arrays to represent the coordinates of the grid. Te remainder of this code section defines a new 
+function called "plot_grid" whose purpose is to plot the 2D grid. This function creates a new figure with a specific
+size where "s" sets the points' size and "color" color colors the points in blue. It also ensures that the plot is 
+displayed and that a title is inserted to indicste the dimensions of the grid. The final portion of the code sets the 
+grid size to 50, calls the function "generate_grid" to create the grid and calls the function "plot_grid" in order to 
+visualize the results as can be seen below.
 </p>
 
 <figure>
           <img
-            src=" https://amilce2023.github.io/labreports/module4image1.png"
+            src=" https://amilce2023.github.io/labreports/module6image1.png"
             width="1000"
             height="800"
             loading="lazy"
