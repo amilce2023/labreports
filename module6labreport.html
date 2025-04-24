@@ -144,9 +144,10 @@ plot_grid(fractal_grid)
 	</code></pre>
 The code above is the portion in which the iterative transformation is applied. The function "iterative_transform"
 combines the x and y coordinates into a complex number z. The function ensures that z is updated uisng the formula
-z=z^2-0.5 for the specified number of iterations. Three different iterations were done which means that the transformation 
-was applied three times. Each iteration calls the the "iterative_transform" function to generate the grid followed a call of
-the "plot_grid" function to visualize the results. The image obtained form each iteration is displayed below.
+z=z<sup>2</sup> - 0.5 for the specified number of iterations. Three different iterations were done which means 
+that the transformation was applied three times. Each iteration calls the the "iterative_transform" function to 
+generate the grid followed a call of the "plot_grid" function to visualize the results. The image obtained form 
+each iteration is displayed below.
 
 <figure>
           <img
@@ -194,11 +195,11 @@ the "plot_grid" function to visualize the results. The image obtained form each 
         </p>
 </code></pre>
 Since the code in this experiment is about applying iterative transformation to points in the plane, we have many
-ways in which we can modify and extend this code. The function for the transformation is $z^2 - 0.5$. We could 
-extend the code by applying the transformation (z^n)+k, but this will result in a great deal of images to analyze, 
-we could analyze the results based on the parity of n and k. To avoid that cumbersome work, we simplify enhance 
-the code and extend it ot create an animation. The code modified code is given below and we will analyze it in 
-the results and analysis section.
+ways in which we can modify and extend this code. The function for the transformation is z=z<sup>2</sup> - 0.5. 
+We could extend the code by applying the transformation (z^n)+k, but this will result in a great deal of images
+to analyze, we could analyze the results based on the parity of n and k. To avoid that cumbersome work, we 
+simplify enhance the code and extend it ot create an animation. The code modified code is given below and we 
+will analyze it in the results and analysis section.
 	</p>
 		
  <section id="code">
