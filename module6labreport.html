@@ -193,29 +193,58 @@ the "plot_grid" function to visualize the results. The image obtained form each 
       <!-- --------------------------------------------------------------------------------------------------- -->
         </p>
 </code></pre>
-In this section, we modify and extend the code to create a more appealing tree. the code is given below. In the
-provided code segment, we only provide the portion that aims at modifying extending the original code.
+Since the code in this experiment is about applying iterative transformation to points in the plane, we have many
+ways in which we can modify and extend this code. The function for the transformation is z^2-0.5. We could extend
+the code by applying the transformation (z^n)+k, but this will result in a great deal of images to analyze, we could
+analyze the results based on the parity of n and k. To avoid that cumbersome work, we simplify enhance the code and 
+extend it ot create an animation. The code modified code is given below and we will analyse it in the results and 
+analysis section.
 	</p>
 		
  <section id="code">
 	<pre><code class="language-python"> 
-def get_color(depth):
-    r = int(255 * (depth / 7))
-    g = int(255 * (1 - depth / 7))
-    b = 0
-    return f'#{r:02x}{g:02x}{b:02x}'
+import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib.animation import FuncAnimation
+from IPython.display import Image, display
+import matplotlib.cm as cm
 
-current_color = get_color(depth)
-        color(current_color)  
-        width(depth)
+def generate_grid(size):
+    x = np.linspace(-1, 1, size)
+    y = np.linspace(-1, 1, size)
+    grid = np.meshgrid(x, y)
+    return grid
 
-def reset_and_draw():
-    clear_output(wait=True)
-    draw_first_tree()
-    draw_second_tree()
+def iterative_transform(grid, iterations):
+    x_grid, y_grid = grid
+    z = x_grid + 1j * y_grid
+    for i in range(iterations):
+        z = z ** 2 - 0.5   
+    return np.real(z), np.imag(z)
 
-reset_and_draw()
+def update(frame):
+    plt.clf()   
+    fractal_grid = iterative_transform(grid, frame + 1)
+    x_fractal, y_fractal = fractal_grid
+    
+    norm = plt.Normalize(vmin=-1, vmax=1)
+    colors = cm.plasma(norm(x_fractal)) 
+     
+    plt.scatter(x_fractal, y_fractal, s=1, color=colors.reshape(-1, 4))
+    plt.title(f'Iteration: {frame + 1}', fontsize=16)
+    plt.xlim(-1, 1)
+    plt.ylim(-1, 1)
 
+size = 50
+grid = generate_grid(size)
+
+fig = plt.figure(figsize=(10, 10))
+ani = FuncAnimation(fig, update, frames=3, repeat=True)
+ 
+gif_filename = 'fractal_animation.gif'
+ani.save(gif_filename, writer='pillow', fps=1)
+ 
+display(Image(filename=gif_filename))
 
 </code></pre>
       </section>
@@ -271,13 +300,13 @@ reset_and_draw()
 
         <figure>
           <img
-            src=" https://amilce2023.github.io/labreports/module4image3.png"
+            src=" https://amilce2023.github.io/labreports/module6animation.gif"
             width="1000"
             height="800"
             loading="lazy"
           />
           <figcaption>
-            <strong></strong> A square drawn by moving the turtle in the canvas.
+            <strong></strong> An animated GIF obtained by modifying and enhancing the original
           </figcaption>
         </figure>
 	      
