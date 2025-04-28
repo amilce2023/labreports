@@ -1,0 +1,340 @@
+
+ 
+
+<!-- INTRODUCTION SECTION -->
+<!-- --------------------------------------------------------------------------------------------------- -->
+<!-- --------------------------------------------------------------------------------------------------- -->
+<!-- --------------------------------------------------------------------------------------------------- -->
+<!-- --------------------------------------------------------------------------------------------------- -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Template for Fractal Geometry Computational Lab Reports" />
+  <link rel="stylesheet" href="https://latex.vercel.app/style.css" />
+  <link 
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism.min.css"
+  />
+  <script defer id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$','$$'], ['\\[','\\]']],
+      }
+    }
+  </script>
+  <title>Fractal Geometry Lab Report</title> 
+</head>
+<body id="top">
+
+
+
+
+  <header>
+    <h1>Fractal Geometry 
+	    Module 6 Lab Report</h1>
+    <p class="author">
+      Annkid Joseph Milcé <br />
+      04/11/2025
+    </p>
+  </header>
+  
+
+
+  <main>
+    <article class="indent-pars">
+      
+      <!-- INTRODUCTION SECTION -->
+      <!-- --------------------------------------------------------------------------------------------------- -->
+      <!-- --------------------------------------------------------------------------------------------------- -->
+      <!-- --------------------------------------------------------------------------------------------------- -->
+      <!-- --------------------------------------------------------------------------------------------------- -->
+      <section id="introduction">
+        <h2>Introduction</h2>
+        <p>
+This is a report for module 6 of the course Fractal Geometry. In this module we experiment with a Colab whose purpose
+is to generate a set of points that we would visualize as a 2D grid. We also see how we can creste complex patterns
+by applying an iterative mathematical trsansformation to the points. We below, we provide and document the code that 
+is used to attain that objective.
+        </p>
+     
+	<!-- ------------------------------------------------------------------------------------------------- -->
+	<!-- ------------------------------------------------------------------------------------------------- -->
+	<!-- ------------------------------------------------------------------------------------------------- -->
+	<!-- ------------------------------------------------------------------------------------------------- -->
+	<section id="code">
+	<pre><code class="language-python">                
+import numpy as np
+import matplotlib.pyplot as plt
+
+def generate_grid(size):
+    x = np.linspace(-1, 1, size) 
+    y = np.linspace(-1, 1, size)
+    grid = np.meshgrid(x, y)   
+    return grid
+
+def plot_grid(grid):
+    x_grid, y_grid = grid
+    plt.figure(figsize=(10, 10))
+    plt.scatter(x_grid, y_grid, s=1, color='blue') 
+    plt.title(f'2D Grid of {len(x_grid)}x{len(y_grid)} points')
+    plt.show()
+
+size = 50   
+		
+grid = generate_grid(size)
+plot_grid(grid)
+	</code></pre>
+In the code above, we first import the necessary libraries. We import n"numpy" as "np" as the library that will
+be used to manipulate the 2D array and to handle numerical operations. We also import "matplotlib.pyplot" to plot
+and visualize the resulting image. Next, we define the function "generate_grid" which will create the points whose 
+size is the number of points along the x and y axes. The command "np.linspace" ensures that the points are evenly sized
+while the command "np.meshgrid" generate the rectangular grid out of the x and y coordinates. The "return" command
+returns a tuple of 2D arrays to represent the coordinates of the grid. Te remainder of this code section defines a new 
+function called "plot_grid" whose purpose is to plot the 2D grid. This function creates a new figure with a specific
+size where "s" sets the points' size and "color" color colors the points in blue. It also ensures that the plot is 
+displayed and that a title is inserted to indicste the dimensions of the grid. The final portion of the code sets the 
+grid size to 50, calls the function "generate_grid" to create the grid and calls the function "plot_grid" in order to 
+visualize the results as can be seen below.
+</p>
+
+<figure>
+          <img
+            src=" https://amilce2023.github.io/labreports/module6image1.png"
+            width="1000"
+            height="800"
+            loading="lazy"
+          />
+          <figcaption>
+            <strong></strong> A 50 x 50 grid generated by the first portion of the code.
+          </figcaption>
+        </figure>
+	      
+      <!-- --------------------------------------------------------------------------------------------------- -->
+        </p>
+		
+<!-- ------------------------------------------------------------------------------------------------- -->
+<!-- ------------------------------------------------------------------------------------------------- -->
+<!-- ------------------------------------------------------------------------------------------------- -->
+<!-- ------------------------------------------------------------------------------------------------- -->
+	    
+        <section id="code">
+	<pre><code class="language-python">  
+ def iterative_transform(grid, iterations):
+    x_grid, y_grid = grid
+    z = x_grid + 1j * y_grid  # Create a complex plane
+    for i in range(iterations):
+        z = z ** 2 - 0.5  # Iteratively apply the transformation
+    return np.real(z), np.imag(z)
+
+iterations = 1
+fractal_grid = iterative_transform(grid, iterations)
+plot_grid(fractal_grid)
+
+iterations = 2
+fractal_grid = iterative_transform(grid, iterations)
+plot_grid(fractal_grid)
+
+iterations = 3
+fractal_grid = iterative_transform(grid, iterations)
+plot_grid(fractal_grid)
+		
+	</code></pre>
+The code above is the portion in which the iterative transformation is applied. The function "iterative_transform"
+combines the x and y coordinates into a complex number z. The function ensures that z is updated uisng the formula
+z = z<sup>2</sup> - 0.5 for the specified number of iterations. Three different iterations were done which means 
+that the transformation was applied three times. Each iteration calls the the "iterative_transform" function to 
+generate the grid followed a call of the "plot_grid" function to visualize the results. The image obtained form 
+each iteration is displayed below.
+
+<figure>
+          <img
+            src=" https://amilce2023.github.io/labreports/module6image2.png"
+            width="1000"
+            height="800"
+            loading="lazy"
+          />
+          <figcaption>
+            <strong></strong> Results of applying the transformation function in the first iteration.
+          </figcaption>
+        </figure>
+	      
+      <!-- --------------------------------------------------------------------------------------------------- -->
+        </p>
+
+ <figure>
+          <img
+            src=" https://amilce2023.github.io/labreports/module6image3.png"
+            width="1000"
+            height="800"
+            loading="lazy"
+          />
+          <figcaption>
+            <strong></strong> Results of applying the transformation function in the second iteration.
+          </figcaption>
+        </figure>
+	      
+      <!-- --------------------------------------------------------------------------------------------------- -->
+        </p>
+
+ <figure>
+          <img
+            src=" https://amilce2023.github.io/labreports/module6image4.png"
+            width="1000"
+            height="800"
+            loading="lazy"
+          />
+          <figcaption>
+            <strong></strong> Results of applying the transformation function in the third iteration.
+          </figcaption>
+        </figure>
+	      
+      <!-- --------------------------------------------------------------------------------------------------- -->
+        </p>
+</code></pre>
+Since the code in this experiment is about applying iterative transformation to points in the plane, we have many
+ways in which we can modify and extend this code. The function for the transformation is z = z<sup>2</sup> - 0.5. 
+We could extend the code by applying the transformation (z<sup>n</sup> + k), but this will result in a great 
+deal of images to analyze, we could analyze the results based on the parity of n and k. To avoid that cumbersome
+work, we simplify enhance the code and extend it ot create an animation. The code modified code is given below 
+and we will analyze it in the results and analysis section.
+	</p>
+		
+ <section id="code">
+	<pre><code class="language-python"> 
+import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib.animation import FuncAnimation
+from IPython.display import Image, display
+import matplotlib.cm as cm
+
+def generate_grid(size):
+    x = np.linspace(-1, 1, size)
+    y = np.linspace(-1, 1, size)
+    grid = np.meshgrid(x, y)
+    return grid
+
+def iterative_transform(grid, iterations):
+    x_grid, y_grid = grid
+    z = x_grid + 1j * y_grid
+    for i in range(iterations):
+        z = z ** 2 - 0.5   
+    return np.real(z), np.imag(z)
+
+def update(frame):
+    plt.clf()   
+    fractal_grid = iterative_transform(grid, frame + 1)
+    x_fractal, y_fractal = fractal_grid
+    
+    norm = plt.Normalize(vmin=-1, vmax=1)
+    colors = cm.plasma(norm(x_fractal)) 
+     
+    plt.scatter(x_fractal, y_fractal, s=1, color=colors.reshape(-1, 4))
+    plt.title(f'Iteration: {frame + 1}', fontsize=16)
+    plt.xlim(-1, 1)
+    plt.ylim(-1, 1)
+
+size = 50
+grid = generate_grid(size)
+
+fig = plt.figure(figsize=(10, 10))
+ani = FuncAnimation(fig, update, frames=3, repeat=True)
+ 
+gif_filename = 'fractal_animation.gif'
+ani.save(gif_filename, writer='pillow', fps=1)
+ 
+display(Image(filename=gif_filename))
+
+</code></pre>
+      </section>
+
+      <!-- RESULTS & ANALYSIS SECTION -->
+      <!-- --------------------------------------------------------------------------------------------------- -->
+      <!-- --------------------------------------------------------------------------------------------------- -->
+      <!-- --------------------------------------------------------------------------------------------------- -->
+      <!-- --------------------------------------------------------------------------------------------------- -->
+      <section id="results">
+      
+      
+        <h2>Results &amp; Analysis</h2>
+        <p>
+To modify and extend the code, we first imported the essential libraries that will facilitate the results that we 
+desire. We imported "numpy" for easy operations, "matplotlib.pyplot" to plot the results, "FuncAnimation" to animate
+the figure, and we used matplotlib.cm to access a color map to enhance the cokor of the results. An important function
+for this experiment is the "iterative_transform()" function. That functions is the basis for the computaions as it
+it takes the 2D grid and a specified number of iterations as input. It applies the transformation function 
+z = z<sup>2</sup> - 0.5 to generate fractal-like structures by transforming the points into complex numbers.
+changing the results into an animation allows to the user to observe how fractals evolve in a more engaging environment
+than the user would in a static environment like the the results generated by the original code. Using color map allows
+for a vibrant visualization that makes the interpreting the structes oif the resulted fractal more appealing. We played 
+with the code by changing the transformation function to use other exponents for the generalized transformation function
+z = z<sup>n</sup> + k and attempt to see what would happen for different values of $n$ and $k$ including possible 
+combination of these values. We based our observations on the parity of n and k. When n and k are both even, the 
+transformation shows symmetric fractal patterns with stable regions and an even distribution. This is different to the 
+case when n is even and k is odd. The transformation retains its symmetrical fractal pattern with a downward shift that 
+can affect the statibility of the pattern. When n is odd and k is even, the fractal pattern presents a somehow asymmetrical 
+chaotic behavior in certain regions that can result in a mixture of stable and unstable regions. When n and k, the fractal 
+show complex dynamics due to asymetry that comes form bothn and k which results in a variety of shapes and forms. A Colab 
+link is provided under resources for access to access some of the iterations for different values of n and k while the 
+results from the modified and extended original code can be seen in the diagrams below.
+
+        <figure>
+          <img
+            src=" https://amilce2023.github.io/labreports/module6animation.gif"
+            width="1000"
+            height="800"
+            loading="lazy"
+          />
+          <figcaption>
+            <strong></strong> An animated GIF obtained by modifying and enhancing the original
+          </figcaption>
+        </figure>
+	      
+      <!-- --------------------------------------------------------------------------------------------------- -->
+        </p>   
+      
+      </section>
+
+
+
+      <!-- CONCLUSION SECTION -->
+      <!-- --------------------------------------------------------------------------------------------------- -->
+      <!-- --------------------------------------------------------------------------------------------------- -->
+      <!-- --------------------------------------------------------------------------------------------------- -->
+      <!-- --------------------------------------------------------------------------------------------------- -->
+      <section id="conclusion">
+        <h2>Conclusion</h2>
+        <p>
+To sum everything, this lab consisted in generating a 2D grid of points on which we apply a complex iterative
+trabsformation that resulted in afractal pattern. We used many iterations to be able to visualize different pattern
+generated by the transformation. We try to change the function in order to make different observations based on a 
+formula for a general transformation function z<sup>n</sup> + k and analyze the results based on the parity on n and k.
+		
+         </p>
+      </section>
+
+     
+     
+
+      <!-- REFERENCE SECTION -->
+      <!-- --------------------------------------------------------------------------------------------------- -->
+      <!-- --------------------------------------------------------------------------------------------------- -->
+      <!-- --------------------------------------------------------------------------------------------------- -->
+      <!-- --------------------------------------------------------------------------------------------------- -->
+      <section id="conclusion">
+        <h2>References</h2>
+        <p>     
+        https://colab.research.google.com/drive/19huv_p4UO5jyIK9MrtaZLKNIHwUgKuwP#scrollTo=SWb9_eFf-pjp
+
+	</p>
+     
+     
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-python.min.js"></script>
+</body>
+</html>
