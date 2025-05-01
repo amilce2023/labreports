@@ -55,10 +55,15 @@
       <section id="introduction">
         <h2>Introduction</h2>
         <p>
-This is a report for module 6 of the course Fractal Geometry. In this module we experiment with a Colab whose purpose
-is to generate a set of points that we would visualize as a 2D grid. We also see how we can creste complex patterns
-by applying an iterative mathematical trsansformation to the points. We below, we provide and document the code that 
-is used to attain that objective.
+In this report, we are working with two different codes. The first code helps experimenting in generasting a Mandelbrot
+set fractal while the second one should generate a Julia set fractal. As an introductory remark, a Mandelbrot set is a 
+two-dimensional set that is defined as the complex numbers c in the complex plane. It was first defined by Robert Wolfe 
+Brooks and the Peter Matelski in 1978. Even though the definiton of this set is very simple, it is known for its complex
+fractal structures when visualized and magnified. On the other hand, a Julia set set is the results of partioning a Riemann
+Sphere. Such partion can create the Fatou set and the Julia set. Formulated by the French mathematician Gaston Julia, 
+the Julia set is obtained from sensitive depedence on initial conditions and from chaotic dynamics of the point z when 
+the complex function f(z) = z<sup>2</sup> + c is iterated. The two codes are documented and explainded below followed by
+a modification in each code for better visualization including an analysis to explain the key changes.
         </p>
      
 	<!-- ------------------------------------------------------------------------------------------------- -->
@@ -70,23 +75,58 @@ is used to attain that objective.
 import numpy as np
 import matplotlib.pyplot as plt
 
-def generate_grid(size):
-    x = np.linspace(-1, 1, size) 
-    y = np.linspace(-1, 1, size)
-    grid = np.meshgrid(x, y)   
-    return grid
+import numpy as np
+import matplotlib.pyplot as plt
+from numba import jit
 
-def plot_grid(grid):
-    x_grid, y_grid = grid
-    plt.figure(figsize=(10, 10))
-    plt.scatter(x_grid, y_grid, s=1, color='blue') 
-    plt.title(f'2D Grid of {len(x_grid)}x{len(y_grid)} points')
-    plt.show()
+@jit(nopython=True)
+def mandelbrot(c, max_iter):
+    z = 0
+    n = 0
+    while abs(z) <= 2 and n < max_iter:
+        z = z*z + c
+        n += 1
+    return n
 
-size = 50   
-		
-grid = generate_grid(size)
-plot_grid(grid)
+@jit(nopython=True)
+def mandelbrot_set(xmin, xmax, ymin, ymax, width, height, max_iter):
+    r1 = np.linspace(xmin, xmax, width)
+    r2 = np.linspace(ymin, ymax, height)
+    n3 = np.empty((width, height))
+
+    for i in range(width):
+        for j in range(height):
+            n3[i, j] = mandelbrot(r1[i] + 1j * r2[j], max_iter)
+
+    return n3
+
+xmin, xmax, ymin, ymax = -2.0, 1.0, -1.5, 1.5
+width, height = 800, 800
+max_iter = 100
+
+n3 = mandelbrot_set(xmin, xmax, ymin, ymax, width, height, max_iter)
+xmin, xmax, ymin, ymax = -0.75, -0.74, 0.1, 0.11
+width, height = 800, 800  
+max_iter = 1000   
+
+n3 = mandelbrot_set(xmin, xmax, ymin, ymax, width, height, max_iter)
+
+plt.figure(figsize=(10, 10))
+plt.imshow(n3.T, extent=[xmin, xmax, ymin, ymax], cmap='hot')
+plt.colorbar()
+plt.title("Mandelbrot Set - Zoomed In")
+plt.show()
+
+xmin, xmax, ymin, ymax = -0.75, -0.74, 0.1, 0.11   
+width, height = 800, 800   
+max_iter = 1000 
+n3 = mandelbrot_set(xmin, xmax, ymin, ymax, width, height, max_iter)
+
+plt.figure(figsize=(10, 10))
+plt.imshow(n3.T, extent=[xmin, xmax, ymin, ymax], cmap='hot')
+plt.colorbar()
+plt.title("Mandelbrot Set - Zoomed In")
+plt.show()
 	</code></pre>
 In the code above, we first import the necessary libraries. We import n"numpy" as "np" as the library that will
 be used to manipulate the 2D array and to handle numerical operations. We also import "matplotlib.pyplot" to plot
