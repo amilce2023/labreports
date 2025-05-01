@@ -128,18 +128,22 @@ plt.colorbar()
 plt.title("Mandelbrot Set - Zoomed In")
 plt.show()
 	</code></pre>
-In the code above, we first import the necessary libraries. We import n"numpy" as "np" as the library that will
-be used to manipulate the 2D array and to handle numerical operations. We also import "matplotlib.pyplot" to plot
-and visualize the resulting image. Next, we define the function "generate_grid" which will create the points whose 
-size is the number of points along the x and y axes. The command "np.linspace" ensures that the points are evenly sized
-while the command "np.meshgrid" generate the rectangular grid out of the x and y coordinates. The "return" command
-returns a tuple of 2D arrays to represent the coordinates of the grid. Te remainder of this code section defines a new 
-function called "plot_grid" whose purpose is to plot the 2D grid. This function creates a new figure with a specific
-size where "s" sets the points' size and "color" color colors the points in blue. It also ensures that the plot is 
-displayed and that a title is inserted to indicste the dimensions of the grid. The final portion of the code sets the 
-grid size to 50, calls the function "generate_grid" to create the grid and calls the function "plot_grid" in order to 
-visualize the results as can be seen below.
-</p>
+The code above is the one that will generats the Mandelbrot Set Fractal. We first imported the 
+important libraries. Numpy is imported for numerical operations, matplotlib.pyplot is used for 
+ploting, and numbra was used to accelerate the code by using the Just-In-Time compiler (JTI). The
+function "mandelbrot(c, max_iter)" is defined to compute whether a point is in the Mandelbrot set along
+the JIT compiler for aneffective performance without using Python's interpreter. This function calculates 
+the number of iterations it takes for the magnitude of z to exceed 2 starting with z = 0 and with the help 
+of the formula z = z<sup>z</sup> + c. The command "max_iter" sets the maximum number of iterations while the 
+parameter c is a point in the complex plane. The return function returns the number of iterations before z 
+escapes or the maximum iterations if it does not escape. A new function "mandelbrot_set()" is defined to give
+a 2D array representing the Mandelbrot set along with parameters that determine the minimum and maximum x-values,
+the minimum and maximum y-values, the height and width of the iresulting image, and the the maximum number of
+iterations for each point. Within the loop for that function, r1, r2, and n3 respectively create an array of
+x-values, an array of y-values, and initialize an empty array to store results, respectively. A "for" loop was
+created to obtain a complex number form x and y using the formula c = r1[i] + 1j*r2[j]. n3[i, j]  is supposed to 
+calculate and store the number of iterations.
+	</p>
 
 <figure>
           <img
