@@ -213,97 +213,102 @@ results and analysis section.
             loading="lazy"
           />
           <figcaption>
-            <strong></strong> Results of applying the transformation function in the first iteration.
+            <strong></strong> A Sierpeński triangle pyramid rotating around its base.
           </figcaption>
         </figure>
 	      
       <!-- --------------------------------------------------------------------------------------------------- -->
-        </p>
-
- <figure>
-          <img
-            src=" https://amilce2023.github.io/labreports/module6image3.png"
-            width="1000"
-            height="800"
-            loading="lazy"
-          />
-          <figcaption>
-            <strong></strong> Results of applying the transformation function in the second iteration.
-          </figcaption>
-        </figure>
-	      
-      <!-- --------------------------------------------------------------------------------------------------- -->
-        </p>
-
- <figure>
-          <img
-            src=" https://amilce2023.github.io/labreports/module6image4.png"
-            width="1000"
-            height="800"
-            loading="lazy"
-          />
-          <figcaption>
-            <strong></strong> Results of applying the transformation function in the third iteration.
-          </figcaption>
-        </figure>
-	      
-      <!-- --------------------------------------------------------------------------------------------------- -->
+        
         </p>
 </code></pre>
-Since the code in this experiment is about applying iterative transformation to points in the plane, we have many
-ways in which we can modify and extend this code. The function for the transformation is z = z<sup>2</sup> - 0.5. 
-We could extend the code by applying the transformation (z<sup>n</sup> + k), but this will result in a great 
-deal of images to analyze, we could analyze the results based on the parity of n and k. To avoid that cumbersome
-work, we simplify enhance the code and extend it ot create an animation. The code modified code is given below 
-and we will analyze it in the results and analysis section.
+The provided code generates and visualizes the Barnsley Fern, a fractal named after the mathematician Michael Barnsley. It employs four
+transformation functions that manipulate points in a 2D space based on defined probabilities. By iterating a specified number of times, 
+the code randomly applies these transformations to create a set of points that form the distinctive fern shape. The resulting points are 
+then plotted using Matplotlib, producing a visually appealing representation of the fractal. The code followed by its resulting image is
+provided below. 
 	</p>
 		
  <section id="code">
 	<pre><code class="language-python"> 
-import numpy as np
-import matplotlib.pyplot as plt
-from matplotlib.animation import FuncAnimation
-from IPython.display import Image, display
-import matplotlib.cm as cm
+# Define tetrahedron vertices
+vertices = [
+    (0, 0, 0),                          # Base vertex 1
+    (2, 0, 0),                          # Base vertex 2
+    (1, np.sqrt(3), 0),                # Base vertex 3
+    (1, np.sqrt(3) / 3, np.sqrt(6)/3)  # Top vertex
+]
 
-def generate_grid(size):
-    x = np.linspace(-1, 1, size)
-    y = np.linspace(-1, 1, size)
-    grid = np.meshgrid(x, y)
-    return grid
+# Parameters
+iterates = 10000  # Increased number of iterations
+frames = 350
+points_per_frame = iterates // frames
 
-def iterative_transform(grid, iterations):
-    x_grid, y_grid = grid
-    z = x_grid + 1j * y_grid
-    for i in range(iterations):
-        z = z ** 2 - 0.5   
-    return np.real(z), np.imag(z)
+# Generate points
+points = np.zeros((iterates, 3))
+points[0] = [random() * 2, random() * np.sqrt(3) / 3, random() * (np.sqrt(6) / 3)]
+for i in range(1, iterates):
+    k = randint(0, 3)
+    points[i] = midpoint(vertices[k], points[i - 1])
 
-def update(frame):
-    plt.clf()   
-    fractal_grid = iterative_transform(grid, frame + 1)
-    x_fractal, y_fractal = fractal_grid
-    
-    norm = plt.Normalize(vmin=-1, vmax=1)
-    colors = cm.plasma(norm(x_fractal)) 
-     
-    plt.scatter(x_fractal, y_fractal, s=1, color=colors.reshape(-1, 4))
-    plt.title(f'Iteration: {frame + 1}', fontsize=16)
-    plt.xlim(-1, 1)
-    plt.ylim(-1, 1)
+# Rotation function
+def rotate_points(points, angle_x, angle_y, angle_z):
+    rotation_x = np.array([
+        [1, 0, 0],
+        [0, np.cos(angle_x), -np.sin(angle_x)],
+        [0, np.sin(angle_x), np.cos(angle_x)]
+    ])
+    rotation_y = np.array([
+        [np.cos(angle_y), 0, np.sin(angle_y)],
+        [0, 1, 0],
+        [-np.sin(angle_y), 0, np.cos(angle_y)]
+    ])
+    rotation_z = np.array([
+        [np.cos(angle_z), -np.sin(angle_z), 0],
+        [np.sin(angle_z), np.cos(angle_z), 0],
+        [0, 0, 1]
+    ])
+    rotation_matrix = rotation_z @ rotation_y @ rotation_x
+    return points @ rotation_matrix.T
 
-size = 50
-grid = generate_grid(size)
+  # Prepare plot
+fig = plt.figure(figsize=(6, 6))
+ax = fig.add_subplot(111, projection='3d')
+scatter = ax.scatter([], [], [], s=0.1, c=[], cmap='viridis')
+ax.set_xlim(0, 2)
+ax.set_ylim(0, np.sqrt(3))
+ax.set_zlim(0, np.sqrt(6)/3)
+ax.set_title("Rotating Sierpinski Tetrahedron", fontsize=14)
+ax.set_xlabel('X-axis')
+ax.set_ylabel('Y-axis')
+ax.set_zlabel('Z-axis')
+ax.view_init(elev=30, azim=30)
 
-fig = plt.figure(figsize=(10, 10))
-ani = FuncAnimation(fig, update, frames=3, repeat=True)
- 
-gif_filename = 'fractal_animation.gif'
-ani.save(gif_filename, writer='pillow', fps=1)
- 
-display(Image(filename=gif_filename))
+# Create animation
+ani = FuncAnimation(fig, update, frames=frames, interval=50, blit=False)
+
+# Save as GIF
+gif_path = "sierpinski_tetrahedron_rotating.gif"
+ani.save(gif_path, writer=PillowWriter(fps=20))
+
+# Display the GIF
+display(Image(filename=gif_path))
 
 </code></pre>
+
+<figure>
+          <img
+            src=" https://amilce2023.github.io/labreports/finalmoduleimage2.png"
+            width="1000"
+            height="800"
+            loading="lazy"
+          />
+          <figcaption>
+            <strong></strong> The Barnsley fern.
+          </figcaption>
+        </figure>
+	      
+      <!-- --------------------------------------------------------------------------------------------------- -->
+        </p>
       </section>
 
       <!-- RESULTS & ANALYSIS SECTION -->
