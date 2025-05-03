@@ -114,8 +114,8 @@ Finally, the points are plotted using Matplotlib to ensure visualization of the 
 <figure>
           <img
             src=" https://amilce2023.github.io/labreports/finalmoduleimage1.png"
-            width="1000"
-            height="800"
+            width="500"
+            height="300"
             loading="lazy"
           />
           <figcaption>
@@ -300,8 +300,8 @@ from IPython.display import Image
 <figure>
           <img
             src=" https://amilce2023.github.io/labreports/finalmoduleimage2.png"
-            width="800"
-            height="600"
+            width="500"
+            height="300"
             loading="lazy"
           />
           <figcaption>
@@ -310,6 +310,109 @@ from IPython.display import Image
         </figure>
 	      
       <!-- --------------------------------------------------------------------------------------------------- -->
+
+        </p>
+This following third code implements a L-system fractal tree using a turtle graphics approach. It begins by initializing the turtle and 
+defining the rules for the L-system. The “apply_rule” function applies some of the rules to generate the next string in the sequence 
+while “generate_l-system” iteratively builds the final string based on the specified number of iterations. The “draw_lsystem” function 
+interprets the generated string, controlling the turtle's movements to create the fractal pattern. The rules dictate how the turtle should
+move and branch, resulting in a visual representation of a tree structure. Finally, the turtle is positioned, and the drawing is executed, 
+producing a green fractal tree on the screen. The tree is pictured below.
+	</p>
+		
+ <section id="code">
+	<pre><code class="language-python"> 
+initializeTurtle()
+showturtle()
+
+def apply_rule(char, rules):
+    return rules.get(char, char)
+
+def generate_lsystem(axiom, rules, iterations):
+    current_string = axiom
+    for _ in range(iterations):
+        current_string = ''.join([apply_rule(char, rules) for char in current_string])
+    return current_string
+
+def draw_lsystem(turtle_string, length, angle):
+    stack = []
+    for command in turtle_string:
+        if command == 'F':
+            forward(length)
+        elif command == '+':
+            left(angle)
+        elif command == '-':
+            right(angle)
+        elif command == '[':
+            position = (getx(), gety())
+            heading_angle = heading()
+            stack.append((position, heading_angle))
+        elif command == ']':
+            position, heading_angle = stack.pop()
+            jump(position[0], position[1])
+            face(heading_angle)
+
+rules = {'F': 'FF+[+F-F-F]-[-F+F+F]'}
+
+axiom = 'F'
+iterations = 4
+
+turtle_string = generate_lsystem(axiom, rules, iterations)
+
+jump(400, 500)
+face(0)
+color('green')
+
+length = 8
+angle = 25
+draw_lsystem(turtle_string, length, angle)
+
+show()
+
+</code></pre>
+ <p>
+The modifications to the L-system code enhance its visual representation by adding the ability to identify and display leaf tips. The new 
+function “find_leaf_endpoints simulates the turtle's movements to track the positions of leaves based on the L-system commands, ensuring
+that only the appropriate 'F' commands are marked as leaves. Additionally, the draw_lsystem function was updated to make these leaf tips as
+small, filled circles, visually distinguishing them from the branches. The branch thickness is also adjusted as the turtle moves deeper into 
+the structure, creating a more realistic tree appearance. See snippets of modified and extended code below
+  </p>
+	 
+<section id="code">
+	<pre><code class="language-python">                
+def find_leaf_endpoints(turtle_string, length, angle):
+    # existing code...
+    if command == 'F':
+        # existing code...
+        if is_leaf:
+            endpoints.add(rounded(next_pos))
+
+def draw_lsystem(turtle_string, length, angle, leaf_positions):
+    # existing code...
+    if pos in leaf_positions:
+        color('forestgreen')
+        width(1)
+        begin_fill()
+        circle(3)  # leaf as small circle
+        end_fill()
+
+thickness = max(1, thickness * 0.7) 
+	</code></pre>
+	 
+<figure>
+          <img
+            src=" https://amilce2023.github.io/labreports/finalmoduleimage4.png"
+            width="500"
+            height="300"
+            loading="lazy"
+          />
+          <figcaption>
+            <strong></strong> The Barnsley fern.
+          </figcaption>
+        </figure>
+	      
+      <!-- --------------------------------------------------------------------------------------------------- -->
+        </p>
         </p>
       </section>
 
@@ -364,8 +467,8 @@ employing color mapping based on the y-values, resulting in a dynamic and engagi
 <figure>
           <img
             src=" https://amilce2023.github.io/labreports/finalmoduleanimation2.gif"
-            width="1000"
-            height="800"
+            width="800"
+            height="600"
             loading="lazy"
           />
           <figcaption>
