@@ -35,10 +35,10 @@
 
   <header>
     <h1>Fractal Geometry 
-	    Module 6 Lab Report</h1>
+	    Final Module Lab Report</h1>
     <p class="author">
       Annkid Joseph Milcé <br />
-      04/11/2025
+      04/27/2025
     </p>
   </header>
   
@@ -221,85 +221,87 @@ results and analysis section.
         
         </p>
 </code></pre>
-The provided code generates and visualizes the Barnsley Fern, a fractal named after the mathematician Michael Barnsley. It employs four
-transformation functions that manipulate points in a 2D space based on defined probabilities. By iterating a specified number of times, 
-the code randomly applies these transformations to create a set of points that form the distinctive fern shape. The resulting points are 
-then plotted using Matplotlib, producing a visually appealing representation of the fractal. The code followed by its resulting image is
-provided below. 
+The next code generates and helps visualize the Barnsley Fern fractal. It employs four transformation functions that manipulate points 
+in a 2-dimensional space based on certain defined probabilities. With a specified number of iterations, the code randomly applies these
+transformations to create a set of points that form the distinctive fern shape. The resulting points are then plotted using Matplotlib, 
+producing a visually appealing representation of the fractal. The code and its resulting image are given below. Extending the code 
+improves its functionality by incorporating additional libraries to enable animations and enhance visual effects. Notably, the “numpy” 
+and “matplotlib.animation” modules are imported to facilitate the creation of dynamic visualizations. 
+Additionally, the “IPython.display.Image” module is included to allow for the display of the generated GIF that is shown in the results 
+and analysis portion.
 	</p>
 		
  <section id="code">
 	<pre><code class="language-python"> 
-# Define tetrahedron vertices
-vertices = [
-    (0, 0, 0),                          # Base vertex 1
-    (2, 0, 0),                          # Base vertex 2
-    (1, np.sqrt(3), 0),                # Base vertex 3
-    (1, np.sqrt(3) / 3, np.sqrt(6)/3)  # Top vertex
-]
+ import random
+import matplotlib.pyplot as plt
 
-# Parameters
-iterates = 10000  # Increased number of iterations
-frames = 350
-points_per_frame = iterates // frames
+# Define the transformation functions
+def f1(x, y):
+    x = 0
+    y = 0.16 * y
+    return x, y
 
-# Generate points
-points = np.zeros((iterates, 3))
-points[0] = [random() * 2, random() * np.sqrt(3) / 3, random() * (np.sqrt(6) / 3)]
-for i in range(1, iterates):
-    k = randint(0, 3)
-    points[i] = midpoint(vertices[k], points[i - 1])
+def f2(x, y):
+    x_new = 0.85 * x + 0.04 * y
+    y_new = -0.04 * x + 0.85 * y + 1.6
+    return x_new, y_new
 
-# Rotation function
-def rotate_points(points, angle_x, angle_y, angle_z):
-    rotation_x = np.array([
-        [1, 0, 0],
-        [0, np.cos(angle_x), -np.sin(angle_x)],
-        [0, np.sin(angle_x), np.cos(angle_x)]
-    ])
-    rotation_y = np.array([
-        [np.cos(angle_y), 0, np.sin(angle_y)],
-        [0, 1, 0],
-        [-np.sin(angle_y), 0, np.cos(angle_y)]
-    ])
-    rotation_z = np.array([
-        [np.cos(angle_z), -np.sin(angle_z), 0],
-        [np.sin(angle_z), np.cos(angle_z), 0],
-        [0, 0, 1]
-    ])
-    rotation_matrix = rotation_z @ rotation_y @ rotation_x
-    return points @ rotation_matrix.T
+def f3(x, y):
+    x_new = 0.2 * x - 0.26 * y
+    y_new = 0.23 * x + 0.22 * y + 1.6
+    return x_new, y_new
 
-  # Prepare plot
-fig = plt.figure(figsize=(6, 6))
-ax = fig.add_subplot(111, projection='3d')
-scatter = ax.scatter([], [], [], s=0.1, c=[], cmap='viridis')
-ax.set_xlim(0, 2)
-ax.set_ylim(0, np.sqrt(3))
-ax.set_zlim(0, np.sqrt(6)/3)
-ax.set_title("Rotating Sierpinski Tetrahedron", fontsize=14)
-ax.set_xlabel('X-axis')
-ax.set_ylabel('Y-axis')
-ax.set_zlabel('Z-axis')
-ax.view_init(elev=30, azim=30)
+def f4(x, y):
+    x_new = -0.15 * x + 0.28 * y
+    y_new = 0.26 * x + 0.24 * y + 0.44
+    return x_new, y_new
 
-# Create animation
-ani = FuncAnimation(fig, update, frames=frames, interval=50, blit=False)
+# Probabilities for each function
+probabilities = [0.01, 0.85, 0.07, 0.07]
 
-# Save as GIF
-gif_path = "sierpinski_tetrahedron_rotating.gif"
-ani.save(gif_path, writer=PillowWriter(fps=20))
+# Barnsley Fern function
+def barnsley_fern(iterations):
+    x, y = 0, 0
+    points = []
 
-# Display the GIF
-display(Image(filename=gif_path))
+    for _ in range(iterations):
+        rand = random.random()
+        if rand   < sum(probabilities[:1]):
+            x, y = f1(x, y)
+        elif rand < sum(probabilities[:2]):
+            x, y = f2(x, y)
+        elif rand < sum(probabilities[:3]):
+            x, y = f3(x, y)
+        else:
+            x, y = f4(x, y)
 
+        points.append((x, y))
+
+    return points
+
+# Generate points for the Barnsley Fern
+iterations = 100000
+fern_points = barnsley_fern(iterations)
+
+# Plot the Barnsley Fern
+x_vals, y_vals = zip(*fern_points)
+plt.figure(figsize=(6, 10))
+plt.scatter(x_vals, y_vals, s=0.1, color='green')
+plt.title('Barnsley Fern')
+plt.show()
+
+#New libraries imported to extend the code
+import numpy as np
+import matplotlib.animation as animation
+from IPython.display import Image
 </code></pre>
 
 <figure>
           <img
             src=" https://amilce2023.github.io/labreports/finalmoduleimage2.png"
-            width="1000"
-            height="800"
+            width="800"
+            height="600"
             loading="lazy"
           />
           <figcaption>
@@ -351,7 +353,29 @@ below
 	      
       <!-- --------------------------------------------------------------------------------------------------- -->
         </p>   
-      
+	      
+Now, we perform an analysis on the extended code for the Barnsley fern. The extended code for the Barnsley fern effectively generates and 
+animates the Barnsley Fern, showcasing how simple mathematical transformations can create complex fractal patterns. The transformations are 
+defined by four functions, each represented by equations f1(x,y)=(0,0.16y), f2(x,y)=(0.85x+0.04y,−0.04x+0.85y+1.6), 
+f3(x,y)=(0.2x−0.26y,0.23x+0.22y+1.6), and f4(x,y)=(−0.15x+0.28y,0.26x+0.24y+0.44). The code uses a random selection mechanism to apply these
+transformations iteratively, and thus, generate points that form the fern's structure. The animation enhances the visual representation by 
+employing color mapping based on the y-values, resulting in a dynamic and engaging display of fractal growth as seen in the animated GIF below.
+
+<figure>
+          <img
+            src=" https://amilce2023.github.io/labreports/finalmoduleanimation2.gif"
+            width="1000"
+            height="800"
+            loading="lazy"
+          />
+          <figcaption>
+            <strong></strong> An animated GIF obtained by modifying and enhancing the Barnsley fern code.
+          </figcaption>
+        </figure>
+	      
+<!-- --------------------------------------------------------------------------------------------------- -->
+        </p> 
+	      
       </section>
 
 
