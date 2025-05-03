@@ -55,10 +55,22 @@
       <section id="introduction">
         <h2>Introduction</h2>
         <p>
-This is a report for module 6 of the course Fractal Geometry. In this module we experiment with a Colab whose purpose
-is to generate a set of points that we would visualize as a 2D grid. We also see how we can creste complex patterns
-by applying an iterative mathematical trsansformation to the points. We below, we provide and document the code that 
-is used to attain that objective.
+This is a report the final module report for the course fractal geomerty. In this module, we worked with the "Chaos
+game" and the "L-Systems" to create fractals, and we concluded the the module by using "Turtle Graphics" to create
+Hilbert curves. The term chaos game is method of creating fractals using a polygon and an initial point selected 
+at random. The term is defined to be an algorithm that identifies points in the plane and was coined by the American
+Mathematician Michael Barnsler]y. The first two codes will document and analyze in this report will generate will
+generate a Sierpeński triangle and a Barnsley fern. Next, we will document and analyze a code that uses the L-Systems
+to create a fractal tree. The L-Systems was introduced by Aristid Lindenmayer as a theoritical framework to study 
+the development of multicellular organisms and then applied to investigate plants. The application of this system was
+to plants description was studied by biologists and include various genreal mathematical methods. "After the 
+incorporation of geometric features, plant models expressed using L-systems became detailed enough to allow the
+use of computer graphics for realistic visualization of plant structures and developmental processes". Finally, we
+will analyze a code that generates Hilbert curves, also known as the Hilbert space-filling curve. It is a type of
+Lindenmayer system invented by the German mathematician and philosopher of mathematics David Hilbert in 1891 whose
+limit is plane-filling function that fills a square. The code being so many, we will only provide snippets of the codes
+and and document only the most important aspect of each of the code. Nonetheless, we shall provide snippets of key
+modifications that were done to extend them followed by an analysis of what each modified and extended code does.
         </p>
      
 	<!-- ------------------------------------------------------------------------------------------------- -->
@@ -67,49 +79,47 @@ is used to attain that objective.
 	<!-- ------------------------------------------------------------------------------------------------- -->
 	<section id="code">
 	<pre><code class="language-python">                
-import numpy as np
 import matplotlib.pyplot as plt
+from random import random, randint
+import numpy as np
 
-def generate_grid(size):
-    x = np.linspace(-1, 1, size) 
-    y = np.linspace(-1, 1, size)
-    grid = np.meshgrid(x, y)   
-    return grid
+def midpoint(P, Q):
+    return (0.5*(P[0] + Q[0]), 0.5*(P[1] + Q[1]))
 
-def plot_grid(grid):
-    x_grid, y_grid = grid
-    plt.figure(figsize=(10, 10))
-    plt.scatter(x_grid, y_grid, s=1, color='blue') 
-    plt.title(f'2D Grid of {len(x_grid)}x{len(y_grid)} points')
-    plt.show()
+vertices = [(0, 0), (2, 2*np.sqrt(3)), (4, 0)]
+iterates = 50000
+x, y = [0]*iterates, [0]*iterates
+x[0], y[0] = random(), random()
 
-size = 50   
-		
-grid = generate_grid(size)
-plot_grid(grid)
+for i in range(1, iterates):
+
+    k = randint(0, 2)
+
+    x[i], y[i] = midpoint( vertices[k], (x[i-1], y[i-1]) )
+
+plt.figure(figsize=(8, 8))
+plt.scatter(x, y, color = 'b', s=0.1)
+plt.title('Sierpinski Triangle Generated Using the Chaos Game')
+plt.axis('equal')  # Ensure aspect ratio is equal for an equilateral triangle
+plt.show()
 	</code></pre>
-In the code above, we first import the necessary libraries. We import n"numpy" as "np" as the library that will
-be used to manipulate the 2D array and to handle numerical operations. We also import "matplotlib.pyplot" to plot
-and visualize the resulting image. Next, we define the function "generate_grid" which will create the points whose 
-size is the number of points along the x and y axes. The command "np.linspace" ensures that the points are evenly sized
-while the command "np.meshgrid" generate the rectangular grid out of the x and y coordinates. The "return" command
-returns a tuple of 2D arrays to represent the coordinates of the grid. Te remainder of this code section defines a new 
-function called "plot_grid" whose purpose is to plot the 2D grid. This function creates a new figure with a specific
-size where "s" sets the points' size and "color" color colors the points in blue. It also ensures that the plot is 
-displayed and that a title is inserted to indicste the dimensions of the grid. The final portion of the code sets the 
-grid size to 50, calls the function "generate_grid" to create the grid and calls the function "plot_grid" in order to 
-visualize the results as can be seen below.
+Above is the first code of the module whose purpose it to generate a Sierpinski triangle using the chaos game algorithm. The code 
+starts by defining the vertices of the triangle and initializes a starting point in a 2D space. The “midpoint” function calculates 
+the midpoint between two points, which is crucial in generating the fractal. In a loop, the code randomly selects one of the triangle's 
+vertices and computes the new point as the midpoint between the selected vertex and the last generated point. The process is repeated 
+for a specified number of iterations which results in bunch of scattered set of points that visually represent the Sierpinski triangle. 
+Finally, the points are plotted using Matplotlib to ensure visualization of the results which can be seen in the picture below.
 </p>
 
 <figure>
           <img
-            src=" https://amilce2023.github.io/labreports/module6image1.png"
+            src=" https://amilce2023.github.io/labreports/finalmoduleimage1.png"
             width="1000"
             height="800"
             loading="lazy"
           />
           <figcaption>
-            <strong></strong> A 50 x 50 grid generated by the first portion of the code.
+            <strong></strong> Sierpeński triangles generated by the chaos game algorithm.
           </figcaption>
         </figure>
 	      
@@ -123,36 +133,81 @@ visualize the results as can be seen below.
 	    
         <section id="code">
 	<pre><code class="language-python">  
- def iterative_transform(grid, iterations):
-    x_grid, y_grid = grid
-    z = x_grid + 1j * y_grid  # Create a complex plane
-    for i in range(iterations):
-        z = z ** 2 - 0.5  # Iteratively apply the transformation
-    return np.real(z), np.imag(z)
+ # Define tetrahedron vertices
+vertices = [
+    (0, 0, 0),                         
+    (2, 0, 0),                         
+    (1, np.sqrt(3), 0),               
+    (1, np.sqrt(3) / 3, np.sqrt(6)/3)  
+]
 
-iterations = 1
-fractal_grid = iterative_transform(grid, iterations)
-plot_grid(fractal_grid)
+# Parameters
+iterates = 10000  
+frames = 350
+points_per_frame = iterates // frames
 
-iterations = 2
-fractal_grid = iterative_transform(grid, iterations)
-plot_grid(fractal_grid)
+# Generate points
+points = np.zeros((iterates, 3))
+points[0] = [random() * 2, random() * np.sqrt(3) / 3, random() * (np.sqrt(6) / 3)]
+for i in range(1, iterates):
+    k = randint(0, 3)
+    points[i] = midpoint(vertices[k], points[i - 1])
 
-iterations = 3
-fractal_grid = iterative_transform(grid, iterations)
-plot_grid(fractal_grid)
+# Rotation function
+def rotate_points(points, angle_x, angle_y, angle_z):
+    rotation_x = np.array([
+        [1, 0, 0],
+        [0, np.cos(angle_x), -np.sin(angle_x)],
+        [0, np.sin(angle_x), np.cos(angle_x)]
+    ])
+    rotation_y = np.array([
+        [np.cos(angle_y), 0, np.sin(angle_y)],
+        [0, 1, 0],
+        [-np.sin(angle_y), 0, np.cos(angle_y)]
+    ])
+    rotation_z = np.array([
+        [np.cos(angle_z), -np.sin(angle_z), 0],
+        [np.sin(angle_z), np.cos(angle_z), 0],
+        [0, 0, 1]
+    ])
+    rotation_matrix = rotation_z @ rotation_y @ rotation_x
+    return points @ rotation_matrix.T
+
+  # Prepare plot
+fig = plt.figure(figsize=(6, 6))
+ax = fig.add_subplot(111, projection='3d')
+scatter = ax.scatter([], [], [], s=0.1, c=[], cmap='viridis')
+ax.set_xlim(0, 2)
+ax.set_ylim(0, np.sqrt(3))
+ax.set_zlim(0, np.sqrt(6)/3)
+ax.set_title("Rotating Sierpinski Tetrahedron", fontsize=14)
+ax.set_xlabel('X-axis')
+ax.set_ylabel('Y-axis')
+ax.set_zlabel('Z-axis')
+ax.view_init(elev=30, azim=30)
+
+# Create animation
+ani = FuncAnimation(fig, update, frames=frames, interval=50, blit=False)
+
+# Save as GIF
+gif_path = "sierpinski_tetrahedron_rotating.gif"
+ani.save(gif_path, writer=PillowWriter(fps=20))
+
+# Display the GIF
+display(Image(filename=gif_path))
 		
 	</code></pre>
-The code above is the portion in which the iterative transformation is applied. The function "iterative_transform"
-combines the x and y coordinates into a complex number z. The function ensures that z is updated uisng the formula
-z = z<sup>2</sup> - 0.5 for the specified number of iterations. Three different iterations were done which means 
-that the transformation was applied three times. Each iteration calls the the "iterative_transform" function to 
-generate the grid followed a call of the "plot_grid" function to visualize the results. The image obtained form 
-each iteration is displayed below.
+Above are code snippets that shows how the Sierpeński triangle code generated by the chaos algorithm was modified and extended to 
+creating a Sierpeński triangle pyramid that is rotating around its base. The extended code transforms the original Sierpinski triangle 
+into a 3D Sierpinski tetrahedron to improve the fractal generation with additional complexity and visual appeal. The definition of 
+tetrahedron vertices was created in 3D space then we increased the number of iterations for smoother points generation and introduced 
+a rotation function to animate the structure in three dimensions. The plotting mechanism was updated to create a 3D scatter plot while 
+a new animation framework was implemented to visualize the rotating tetrahedron and save it as a GIF. The results can be seen in the
+results and analysis section.
 
 <figure>
           <img
-            src=" https://amilce2023.github.io/labreports/module6image2.png"
+            src=" https://amilce2023.github.io/labreports/finalmoduleanimation1.gif"
             width="1000"
             height="800"
             loading="lazy"
@@ -261,35 +316,31 @@ display(Image(filename=gif_filename))
       
         <h2>Results &amp; Analysis</h2>
         <p>
-To modify and extend the code, we first imported the essential libraries that will facilitate the results that we 
-desire. We imported "numpy" for easy operations, "matplotlib.pyplot" to plot the results, "FuncAnimation" to animate
-the figure, and we used matplotlib.cm to access a color map to enhance the cokor of the results. An important function
-for this experiment is the "iterative_transform()" function. That functions is the basis for the computaions as it
-it takes the 2D grid and a specified number of iterations as input. It applies the transformation function 
-z = z<sup>2</sup> - 0.5 to generate fractal-like structures by transforming the points into complex numbers.
-changing the results into an animation allows to the user to observe how fractals evolve in a more engaging environment
-than the user would in a static environment like the the results generated by the original code. Using color map allows
-for a vibrant visualization that makes the interpreting the structes oif the resulted fractal more appealing. We played 
-with the code by changing the transformation function to use other exponents for the generalized transformation function
-z = z<sup>n</sup> + k and attempt to see what would happen for different values of $n$ and $k$ including possible 
-combination of these values. We based our observations on the parity of n and k. When n and k are both even, the 
-transformation shows symmetric fractal patterns with stable regions and an even distribution. This is different to the 
-case when n is even and k is odd. The transformation retains its symmetrical fractal pattern with a downward shift that 
-can affect the statibility of the pattern. When n is odd and k is even, the fractal pattern presents a somehow asymmetrical 
-chaotic behavior in certain regions that can result in a mixture of stable and unstable regions. When n and k, the fractal 
-show complex dynamics due to asymetry that comes form bothn and k which results in a variety of shapes and forms. A Colab 
-link is provided under resources for access to access some of the iterations for different values of n and k while the 
-results from the modified and extended original code can be seen in the diagrams below.
-
+The extend chaos game code created a 3D Sierpinski tetrahedron using the chaos game algorithm to turn it into fractals. Generation the 
+points involves using the midpoint formula 
+<p>
+M = &lt; (P<sub>x</sub> + Q<sub>x</sub>) / 2, (P<sub>y</sub> + Q<sub>y</sub>) / 2, (P<sub>z</sub> + Q<sub>z</sub>) / 2 &gt;
+</p>
+where M is the midpoint between points P and Q. The tetrahedron's vertices are defined in a 3D coordinate system, with the base vertices
+at (0, 0, 0), (2, 0, 0), and (1, √3, 0), and the apex at (1, √3/3, √6/3). The code generates points iteratively by randomly selecting a 
+vertex and moving to the midpoint between that vertex and the last point, effectively creating a dense set of points that approximate the
+fractal. In addition, the code incorporates a rotation mechanism using rotation matrices for the x, y, and z axes, which are combined to 
+achieve a full 3D rotation.
+<p>
+R = R<sub>z</sub> • R<sub>y</sub> • R<sub>x</sub>
+</p>
+where R<sub>x</sub>, R<sub>y</sub>, and R<sub>z</sub> represent the rotation matrices around the respective axes. The results can be seen
+below
+	      
         <figure>
           <img
-            src=" https://amilce2023.github.io/labreports/module6animation.gif"
+            src=" https://amilce2023.github.io/labreports/finalmoduleanimation1.gif"
             width="1000"
             height="800"
             loading="lazy"
           />
           <figcaption>
-            <strong></strong> An animated GIF obtained by modifying and enhancing the original
+            <strong></strong> An animated GIF obtained by modifying and enhancing the original code.
           </figcaption>
         </figure>
 	      
